@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 class TransactionIntent(BaseModel):
@@ -7,4 +8,4 @@ class TransactionIntent(BaseModel):
     receiver_name: str
     receiver_country: str
     amount_usd: float
-    iso_postal_code: Optional[str] = None 
+    iso_postal_code: Optional[str] = None
