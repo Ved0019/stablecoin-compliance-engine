@@ -148,9 +148,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to interact 
 
 ## 🚧 Build Challenges & Technical Obstacles
 
-* **LangChain Prompt Interpolation Collisions:** Our system prompt required the AI to output strict JSON (`{"confidence": 0.0}`). LangChain uses single curly braces for variable injection, causing immediate crashes by mistaking the JSON syntax for missing variables. We resolved this by implementing double-brace escaping (`{{"confidence": 0.0}}`) within the prompt template, cleanly isolating instructions from the parser.
-* **API Model Deprecation & ID Mapping:** Integrating Groq for ultra-fast LPU inference resulted in `404 Model Not Found` errors because the UI model names did not match hidden API IDs. We built a rapid Python script to directly ping the Groq `/models` REST endpoint, extracting the exact active `model_id` tree (e.g., mapping to `openai/gpt-oss-20b`) for reliable execution.
-* **Monorepo Secret Management:** During rapid iteration, an environment file was accidentally tracked by Git, triggering GitHub's Push Protection. We engineered a comprehensive monorepo `.gitignore` and executed a soft reset (`git reset origin/main`) to scrub the secret from commit history without losing code or build configurations.
+
 
 ```
 
