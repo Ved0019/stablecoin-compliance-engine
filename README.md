@@ -147,6 +147,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to interact 
 ---
 
 ## 🚧 Build Challenges & Technical Obstacles
+Excessive Token Consumption (The "AI Tax")
+The operational cost of running unoptimized AI agents can quietly kill a fintech startup's margins.
+The Problem: Multi-agent architectures are computationally heavy, consuming roughly 15 times the tokens of a standard chat interaction
+. If your routing engine queries a heavy LLM API for every micro-payment, your infrastructure cost will scale directly with transaction volume, rendering low-value L2 stablecoin transfers uneconomical
+.
+How to Solve It: Implement hybrid semantic caching
+. Cache embedding-based inputs for standard compliance lookups and repeat corridors, bypassing the LLM entirely for known transactions to recover massive cost-efficienc
 
 
 
