@@ -155,6 +155,25 @@ The Problem: Multi-agent architectures are computationally heavy, consuming roug
 How to Solve It: Implement hybrid semantic caching
 . Cache embedding-based inputs for standard compliance lookups and repeat corridors, bypassing the LLM entirely for known transactions to recover massive cost-efficienc
 
+Throughput Collapse and Timeout Truncation at Scale
+While highly complex agent architectures (such as reflexive loops) work beautifully in low-volume testing, they behave unpredictably under heavy enterprise loads
+.
+The Problem: Benchmark data shows that while reflexive agent systems achieve the highest accuracy at low volumes, their performance degrades rapidly beyond 25,000 documents per day
+. Under peak load, the queuing delays caused by multi-turn agent conversations result in system timeouts
+. When these timeouts truncate the correction loops, the accuracy of the entire system collapses
+.
+How to Solve It: Build your architecture to support dynamic scale-resilient fallbacks
+. If your transaction queue begins to backup, have the orchestrator dynamically shift from a heavy reflexive pattern to a more scale-resilient, deterministic sequential pipeline to preserve processing throughput
+Agent Coordination Failures and "Overthinking" Loops
+As you add specialized agents to handle different compliance jurisdictions, the complexity of inter-agent communication increases
+.
+The Problem: Studies show that agent coordination failures (such as message corruption, deadlocks, and conflicting assumptions) are a primary reason multi-agent systems fail
+. Furthermore, if your engine uses a reflexive self-correction architecture to refine low-confidence routing routes, it can experience "oscillating ambiguity resolution"—where the AI gets trapped in an infinite loop, overthinking and bouncing between different interpretations of a complex regulatory mandate
+.
+How to Solve It: Place strict limits (maximum of 2 to 3 iterations) on self-correction loops
+. If the model fails to reach a confident decision within these bounds, the system must trigger a deterministic fallback to route the transaction to a human operations dashboard
+.
+
 
 
 ```
