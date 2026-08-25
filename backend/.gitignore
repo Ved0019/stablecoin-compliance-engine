@@ -8,3 +8,57 @@ wheels/
 
 # Virtual environments
 .venv
+
+.env
+
+# =========================
+# FRONTEND (Next.js / Node)
+# =========================
+# dependencies
+/frontend/node_modules
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js build output
+/frontend/.next
+/frontend/out
+.next
+out
+
+# Next.js cache
+.swc
+
+# =========================
+# BACKEND (Python / FastAPI)
+# =========================
+# Virtual environments
+/backend/.venv
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# =========================
+# SECRETS & ENVIRONMENT 
+# (CRITICAL - DO NOT COMMIT API KEYS)
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# =========================
+# OS & MISC
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/

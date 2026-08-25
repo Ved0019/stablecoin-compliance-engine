@@ -1,11 +1,18 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import Optional
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from api.routes import transaction_router
 
 app = FastAPI(title="Stablecoin Route Optimizer API")
 
-# Mount the router
+# Allow all origins for local hackathon testing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(transaction_router.router, prefix="/api/v1")
 
 @app.get("/health")
