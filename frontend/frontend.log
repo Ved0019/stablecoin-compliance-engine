@@ -1,0 +1,24 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.18.157.202:3000
+✓ Ready in 8.5s
+✓ Running next.config.ts took 86ms
+
+⨯ ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  [90m536 |[0m                           <div className=[32m"flex items-center space-x-3"[0m>
+  [90m537 |[0m                             <div className=[32m"p-2 rounded-md"[0m>
+[31m[1m>[0m [90m538 |[0m                               <getRouteIcon(item.result.route) className=[32m"w-4 h-4 text-sl...[0m
+  [90m    |[0m                                            [31m[1m^[0m
+  [90m539 |[0m                             </div>
+  [90m540 |[0m                             <div className=[32m"space-y-1"[0m>
+  [90m541 |[0m                               <p className=[32m"text-sm font-medium text-slate-900"[0m>
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 6.3s (next.js: 6.1s, application-code: 240ms)
