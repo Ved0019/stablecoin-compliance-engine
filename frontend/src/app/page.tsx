@@ -535,7 +535,9 @@ export default function Dashboard() {
                         {item.result.route ? (
                           <div className="flex items-center space-x-3">
                             <div className="p-2 rounded-md">
-                              <getRouteIcon(item.result.route) className="w-4 h-4 text-slate-600" />
+                              {React.createElement(getRouteIcon(item.result.route), {
+                                className: "w-4 h-4 text-slate-600"
+                              })}
                             </div>
                             <div className="space-y-1">
                               <p className="text-sm font-medium text-slate-900">
@@ -588,7 +590,7 @@ export default function Dashboard() {
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <span>Blocked (<70% confidence)</span>
+                <span>Blocked (less than 70% confidence)</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-blue-500 rounded-full" />

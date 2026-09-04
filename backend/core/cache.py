@@ -2,6 +2,11 @@
 Semantic caching layer for the stablecoin compliance engine.
 Provides LRU caching for LLM responses, screening results, and route decisions.
 """
+import sys
+import os
+# Add the backend directory to sys.path so we can import from models when running directly
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import hashlib
 import json
 from functools import lru_cache
@@ -141,3 +146,25 @@ class CacheManager:
 
 # Global cache manager instance
 cache_manager = CacheManager()
+
+if __name__ == "__main__":
+    print("Testing CacheManager...")
+    cm = CacheManager()
+    
+    # Create a dummy transaction
+    tx = TransactionIntent(
+        id="test-123",
+        sender_name="Alice",
+        sender_country="US",
+        receiver_name="Bob",
+        receiver_country="UK",
+        amount_usd=100.0,
+        iso_postal_code="12345"
+    )
+    
+    # Test setting and getting
+    cm.set_llm_confidence(tx, 0.95)
+    confidence = cm.get_llm_confidence(tx)
+    print(f"Cached LLM confidence: {confidence}")
+    print(f"Cache stats: {cm.get_stats()}")
+    print("CacheManager ran successfully!")

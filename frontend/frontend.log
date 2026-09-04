@@ -22,3 +22,636 @@ Parsing ecmascript source code failed
 
 
  GET / 500 in 6.3s (next.js: 6.1s, application-code: 240ms)
+⨯ ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  [90m536 |[0m                           <div className=[32m"flex items-center space-x-3"[0m>
+  [90m537 |[0m                             <div className=[32m"p-2 rounded-md"[0m>
+[31m[1m>[0m [90m538 |[0m                               <getRouteIcon(item.result.route) className=[32m"w-4 h-4 text-sl...[0m
+  [90m    |[0m                                            [31m[1m^[0m
+  [90m539 |[0m                             </div>
+  [90m540 |[0m                             <div className=[32m"space-y-1"[0m>
+  [90m541 |[0m                               <p className=[32m"text-sm font-medium text-slate-900"[0m>
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 106ms (next.js: 82ms, application-code: 24ms)
+[browser] Uncaught Error: ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:538:44)
+    at <unknown> (Error: (./src/app/page.tsx:538:44)
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  [90m536 |[0m                           <div className=[32m"flex items-center space-x-3"[0m>
+  [90m537 |[0m                             <div className=[32m"p-2 rounded-md"[0m>
+[31m[1m>[0m [90m538 |[0m                               <getRouteIcon(item.result.route) className=[32m"w-4 h-4 text-sl...[0m
+  [90m    |[0m                                            [31m[1m^[0m
+  [90m539 |[0m                             </div>
+  [90m540 |[0m                             <div className=[32m"space-y-1"[0m>
+  [90m541 |[0m                               <p className=[32m"text-sm font-medium text-slate-900"[0m>
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 32ms (next.js: 13ms, application-code: 19ms)
+[browser] Uncaught Error: ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:538:44)
+    at <unknown> (Error: (./src/app/page.tsx:538:44)
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  [90m536 |[0m                           <div className=[32m"flex items-center space-x-3"[0m>
+  [90m537 |[0m                             <div className=[32m"p-2 rounded-md"[0m>
+[31m[1m>[0m [90m538 |[0m                               <getRouteIcon(item.result.route) className=[32m"w-4 h-4 text-sl...[0m
+  [90m    |[0m                                            [31m[1m^[0m
+  [90m539 |[0m                             </div>
+  [90m540 |[0m                             <div className=[32m"space-y-1"[0m>
+  [90m541 |[0m                               <p className=[32m"text-sm font-medium text-slate-900"[0m>
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 26ms (next.js: 9ms, application-code: 17ms)
+[browser] Uncaught Error: ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:538:44)
+    at <unknown> (Error: (./src/app/page.tsx:538:44)
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  [90m536 |[0m                           <div className=[32m"flex items-center space-x-3"[0m>
+  [90m537 |[0m                             <div className=[32m"p-2 rounded-md"[0m>
+[31m[1m>[0m [90m538 |[0m                               <getRouteIcon(item.result.route) className=[32m"w-4 h-4 text-sl...[0m
+  [90m    |[0m                                            [31m[1m^[0m
+  [90m539 |[0m                             </div>
+  [90m540 |[0m                             <div className=[32m"space-y-1"[0m>
+  [90m541 |[0m                               <p className=[32m"text-sm font-medium text-slate-900"[0m>
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 25ms (next.js: 11ms, application-code: 14ms)
+[browser] Uncaught Error: ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:538:44)
+    at <unknown> (Error: (./src/app/page.tsx:538:44)
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:538:44
+Error: Expected '</', got '('
+  536 |                           <div className="flex items-center space-x-3">
+  537 |                             <div className="p-2 rounded-md">
+> 538 |                               <getRouteIcon(item.result.route) className="w-4 h-4 text-sl...
+      |                                            ^
+  539 |                             </div>
+  540 |                             <div className="space-y-1">
+  541 |                               <p className="text-sm font-medium text-slate-900">
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+ GET / 500 in 222ms (next.js: 119ms, application-code: 103ms)
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] Uncaught Error: ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:593:33)
+    at <unknown> (Error: (./src/app/page.tsx:593:33)
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 337ms (next.js: 227ms, application-code: 110ms)
+[browser] Uncaught Error: ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:593:33)
+    at <unknown> (Error: (./src/app/page.tsx:593:33)
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 374ms (next.js: 235ms, application-code: 139ms)
+[browser] Uncaught Error: ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:593:33)
+    at <unknown> (Error: (./src/app/page.tsx:593:33)
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 569ms (next.js: 359ms, application-code: 210ms)
+[browser] Uncaught Error: ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./src/app/page.tsx:593:33)
+    at <unknown> (Error: (./src/app/page.tsx:593:33)
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+[browser] ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  591 |               <div className="flex items-center space-x-2">
+  592 |                 <div className="w-3 h-3 bg-red-500 rounded-full" />
+> 593 |                 <span>Blocked (<70% confidence)</span>
+      |                                 ^^
+  594 |               </div>
+  595 |               <div className="flex items-center space-x-2">
+  596 |                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
+
+Parsing ecmascript source code failed 
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 48ms (next.js: 26ms, application-code: 22ms)
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 29ms (next.js: 17ms, application-code: 12ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0A%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A%0ACaused%20by%3A%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20subscribe_issues_and_diags_operation%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AProject%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aserver_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+✓ Compiled in 307ms
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 41ms (next.js: 23ms, application-code: 17ms)
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 54ms (next.js: 38ms, application-code: 16ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0A%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A%0ACaused%20by%3A%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20subscribe_issues_and_diags_operation%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AProject%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aserver_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+✓ Compiled in 169ms
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 80ms (next.js: 67ms, application-code: 13ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 28ms (next.js: 11ms, application-code: 17ms)
+⨯ ./src/app/page.tsx:593:33
+Error: Expected '</', got 'numeric literal'
+  [90m591 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m592 |[0m                 <div className=[32m"w-3 h-3 bg-red-500 rounded-full"[0m />
+[31m[1m>[0m [90m593 |[0m                 <span>[33mBlocked[0m (<[35m70[0m% confidence)</span>
+  [90m    |[0m                                 [31m[1m^^[0m
+  [90m594 |[0m               </div>
+  [90m595 |[0m               <div className=[32m"flex items-center space-x-2"[0m>
+  [90m596 |[0m                 <div className=[32m"w-3 h-3 bg-blue-500 rounded-full"[0m />
+
+Parsing ecmascript source code failed
+
+
+ GET / 500 in 30ms (next.js: 17ms, application-code: 12ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0A%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A%0ACaused%20by%3A%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20subscribe_issues_and_diags_operation%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AProject%3A%3Aserver_changed%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aserver_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+✓ Compiled in 23ms
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 35ms (next.js: 17ms, application-code: 18ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 28ms (next.js: 14ms, application-code: 14ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 26ms (next.js: 10ms, application-code: 15ms)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vedya\AppData\Local\Temp\next-panic-87cadd158b4140ca1938adee4fd83e2d.log.
+
+To help make Turbopack better, report this error by ]8;;https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d0ac8828%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20write%20app%20endpoint%20%2Fpage%0A%0ACaused%20by%3A%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%0ADebug%20info%3A%0A-%20Execution%20of%20get_written_endpoint_with_issues_operation%20failed%0A-%20Execution%20of%20endpoint_write_to_disk%20failed%0A-%20Execution%20of%20%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aoutput%20failed%0A-%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A-%20Execution%20of%20%2Aall_asset_paths%20failed%0A-%20Execution%20of%20%2AAppEndpointOutput%3A%3Aoutput_assets%20failed%0A-%20Execution%20of%20AppEndpoint%3A%3Aoutput%20failed%0A-%20Execution%20of%20AppProject%3A%3Aapp_module_graphs%20failed%0A-%20Execution%20of%20%2A%3CAppEndpoint%20as%20Endpoint%3E%3A%3Aadditional_entries%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs%20failed%0A-%20Execution%20of%20ModuleGraph%3A%3Afrom_graphs_inner%20failed%0A-%20Execution%20of%20SingleModuleGraph%3A%3Anew_with_entries_visited_intern%20failed%0A-%20%5Bproject%5D%2Fsrc%2Fapp%2Fglobals.css%20%5Bapp-client%5D%20%28css%29%0A-%20Execution%20of%20primary_chunkable_referenced_modules%20failed%0A-%20Execution%20of%20%3CCssModule%20as%20Module%3E%3A%3Areferences%20failed%0A-%20Execution%20of%20parse_css%20failed%0A-%20Execution%20of%20%3CPostCssTransformedAsset%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20PostCssTransformedAsset%3A%3Aprocess%20failed%0A-%20Execution%20of%20evaluate_webpack_loader%20failed%0A-%20creating%20new%20process%0A-%20node%20process%20exited%20before%20we%20could%20connect%20to%20it%20with%20exit%20code%3A%200xc0000142%0A%20%20Process%20output%3A%0A%20%20%0A%20%20Process%20error%20output%3A%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+ GET / 500 in 33ms (next.js: 13ms, application-code: 20ms)
+[?25h
