@@ -1,55 +1,51 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
-@layer base {
-  :root {
-    --background: #ffffff;
-    --foreground: #1a1a1a;
-    --card: #ffffff;
-    --border: #e0e0e0;
-    --input: #f5f5f5;
-    --primary: #1976d2;
-    --primary-foreground: #ffffff;
-    --secondary: #6c757d;
-    --secondary-foreground: #ffffff;
-    --muted: #f8f9fa;
-    --muted-foreground: #6c757d;
-    --accent: #e3f2fd;
-    --accent-foreground: #0d47a1;
-    --destructive: #d32f2f;
-    --destructive-foreground: #ffffff;
-    --success: #388e3c;
-    --warning: #f57c00;
-    --info: #0288d1;
-    --ring: #1976d2;
-    --radius: 1rem;
-    --radius-sm: 0.5rem;
-    --radius-lg: 1.5rem;
-  }
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --primary: #3B82F6;
+  --primary-foreground: #ffffff;
+  --secondary: #8B5CF6;
+  --secondary-foreground: #ffffff;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --accent: #e3f2fd;
+  --accent-foreground: #0d47a1;
+  --destructive: #F87171;
+  --destructive-foreground: #ffffff;
+  --success: #10B981;
+  --warning: #f59e0b;
+  --info: #0288d1;
+  --ring: #3B82F6;
+  --radius: 1rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1.5rem;
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #121212;
-      --foreground: #e0e0e0;
-      --card: #1e1e1e;
-      --border: #333333;
-      --input: #2d2d2d;
-      --primary: #64b5f6;
-      --primary-foreground: #000000;
-      --secondary: #8e8e93;
-      --secondary-foreground: #ffffff;
-      --muted: #2d2d2d;
-      --muted-foreground: #b0b0b0;
-      --accent: #1e3a5f;
-      --accent-foreground: #90caf9;
-      --destructive: #e57373;
-      --destructive-foreground: #000000;
-      --success: #81c784;
-      --warning: #ffb74d;
-      --info: #4fc3f7;
-      --ring: #64b5f6;
-    }
-  }
+[data-theme="dark"] {
+  --background: #070708;
+  --foreground: #f8fafc;
+  --card: #0D0E11;
+  --border: #1e293b;
+  --input: #334155;
+  --primary: #3B82F6;
+  --primary-foreground: #ffffff;
+  --secondary: #8B5CF6;
+  --secondary-foreground: #ffffff;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #e3f2fd;
+  --accent-foreground: #0d47a1;
+  --destructive: #F87171;
+  --destructive-foreground: #ffffff;
+  --success: #10B981;
+  --warning: #f59e0b;
+  --info: #0288d1;
+  --ring: #3B82F6;
 }
 
 @layer base {
@@ -79,7 +75,7 @@
   /* Enhanced Button Styles */
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium
-           transition-all duration-200 ease-in-out
+           transition duration-200 ease-in-out
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
            disabled:pointer-events-none disabled:opacity-50
            shadow-sm hover:shadow-md;
@@ -88,7 +84,7 @@
 
   .btn-secondary {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium
-           transition-all duration-200 ease-in-out
+           transition duration-200 ease-in-out
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
            disabled:pointer-events-none disabled:opacity-50
            shadow-sm hover:shadow-md;
@@ -97,7 +93,7 @@
 
   .btn-outline {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium
-           transition-all duration-200 ease-in-out
+           transition duration-200 ease-in-out
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
            disabled:pointer-events-none disabled:opacity-50
            shadow-sm hover:shadow-md;
@@ -106,7 +102,7 @@
 
   .btn-icon {
     @apply inline-flex items-center justify-center rounded-full
-           transition-all duration-200 ease-in-out
+           transition duration-200 ease-in-out
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
            disabled:pointer-events-none disabled:opacity-50
            shadow-sm hover:shadow-md h-10 w-10;
@@ -116,14 +112,14 @@
   /* Enhanced Card Styles */
   .card {
     @apply bg-card border border-border rounded-lg
-           shadow-sm hover:shadow-md transition-all duration-200 ease-in-out;
+           shadow-sm hover:shadow-md transition duration-200 ease-in-out;
     @apply border-none; /* Remove default border for cleaner look */
     @apply bg-white/90 backdrop-blur-sm; /* Glassmorphism effect */
   }
 
   .card-elevated {
     @apply bg-card border border-border rounded-lg
-           shadow-md hover:shadow-lg transition-all duration-200 ease-in-out;
+           shadow-md hover:shadow-lg transition duration-200 ease-in-out;
   }
 
   /* Enhanced Input Styles */
@@ -132,7 +128,7 @@
            bg-background px-4 py-2 text-sm
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
            disabled:cursor-not-allowed disabled:opacity-50
-           transition-all duration-200 ease-in-out;
+           transition duration-200 ease-in-out;
     @apply placeholder:text-muted-foreground;
     @apply [&::placeholder]:text-muted-foreground;
   }
@@ -181,12 +177,15 @@
   /* Enhanced Metric Styles */
   .metric-card {
     @apply bg-card border border-border rounded-lg
-           p-6 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out;
+           p-6 shadow-sm hover:shadow-md transition duration-200 ease-in-out;
     @apply border-none bg-white/80 backdrop-blur-sm;
   }
 
   .metric-value {
     @apply text-2xl font-bold text-foreground tracking-tight;
+    /* Monospace styling for numbers */
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
   }
 
   .metric-label {
@@ -213,11 +212,11 @@
   /* Enhanced Confidence Bar */
   .confidence-bar {
     @apply w-full h-2 bg-muted rounded-full overflow-hidden
-           transition-[width] duration-300 ease-in-out;
+           transition duration-300 ease-in-out;
   }
 
   .confidence-fill {
-    @apply h-full transition-[width] duration-300 ease-in-out;
+    @apply h-full transition duration-300 ease-in-out;
   }
 
   /* Enhanced Alert Styles */
@@ -308,4 +307,52 @@
     animation: slide-up 0.3s ease-out forwards;
   }
 
+  /* Responsive Utilities */
+  .gap-2 {
+    @apply gap-0.5;
+  }
+
+  .gap-3 {
+    @apply gap-0.75;
+  }
+
+  .gap-4 {
+    @apply gap-1;
+  }
+
+  .gap-5 {
+    @apply gap-1.25;
+  }
+
+  .gap-6 {
+    @apply gap-1.5;
+  }
+
+  .gap-8 {
+    @apply gap-2;
+  }
+
+  .gap-10 {
+    @apply gap-2.5;
+  }
+
+  .gap-12 {
+    @apply gap-3;
+  }
+
+  .gap-16 {
+    @apply gap-4;
+  }
+
+  .gap-20 {
+    @apply gap-5;
+  }
+
+  .gap-24 {
+    @apply gap-6;
+  }
+
+  .gap-32 {
+    @apply gap-8;
+  }
 }
