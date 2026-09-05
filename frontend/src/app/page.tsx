@@ -1,820 +1,422 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
+  Activity,
   AlertTriangle,
+  ArrowRight,
   CheckCircle,
-  XCircle,
   Clock,
-  TrendingUp,
   Shield,
+  ShieldAlert,
+  Terminal,
+  XCircle,
   Zap,
-  Bot,
-  Layout,
-  List,
-  Search,
-  Settings,
-  Download,
-  Upload,
+  Server,
+  Network
 } from 'lucide-react';
-import Globe3D from '@/components/ui/3d-globe';
 
-const testCases = [
-  {
-    id: "1",
-    sender_name: "Global Tech Solutions Inc",
-    sender_country: "US",
-    receiver_name: "EuroTech Distribution GmbH",
-    receiver_country: "DE",
-    amount_usd: 450.00,
-    iso_postal_code: "10115"
-  },
-  {
-    id: "2",
-    sender_name: "Pacific Rim Trading Co",
-    sender_country: "US",
-    receiver_name: "Asia Pacific Logistics Ltd",
-    receiver_country: "SG",
-    amount_usd: 450.00,
-    iso_postal_code: null
-  },
-  {
-    id: "3",
-    sender_name: "Multinational Corp Holdings",
-    sender_country: "US",
-    receiver_name: "European Manufacturing SA",
-    receiver_country: "FR",
-    amount_usd: 15000.00,
-    iso_postal_code: "75001"
-  },
-  {
-    id: "4",
-    sender_name: "Shady Offshore LLC",
-    sender_country: "PA",
-    receiver_name: "O.S.A.M.A. bin Laden",
-    receiver_country: "SY",
-    amount_usd: 100.00,
-    iso_postal_code: "12345"
-  },
-  {
-    id: "5",
-    sender_name: "Domestic Supplies Inc",
-    sender_country: "GB",
-    receiver_name: "Local Retail Chain Ltd",
-    receiver_country: "GB",
-    amount_usd: 750.00,
-    iso_postal_code: "SW1A 1AA"
-  },
-  {
-    id: "6",
-    sender_name: "International Consulting Group",
-    sender_country: "AU",
-    receiver_name: "Global Advisory Services KK",
-    receiver_country: "JP",
-    amount_usd: 3200.00,
-    iso_postal_code: "100-0005"
-  }
+// --- Glow Card Component (Cursor-Tracking Border) ---
+const GlowCard = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!divRef.current || isFocused) return;
+    const div = divRef.current;
+    const rect = div.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setOpacity(1);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setOpacity(0);
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(1);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  return (
+    <div
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative rounded-xl border border-white/5 bg-[#0D0E11] overflow-hidden ${className}`}
+    >
+      <div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 z-0"
+        style={{
+          opacity,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.12), transparent 40%)`,
+        }}
+      />
+      <div className="relative z-10 h-full">{children}</div>
+    </div>
+  );
+};
+
+// --- SVG Area Spline Chart ---
+const VelocityChart = () => {
+  return (
+    <div className="w-full h-full min-h-[160px] relative mt-4 flex flex-col justify-end">
+      <svg viewBox="0 0 800 200" className="w-full h-full preserve-3d" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.0" />
+          </linearGradient>
+        </defs>
+        {/* Grid lines */}
+        <line x1="0" y1="50" x2="800" y2="50" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="0" y1="150" x2="800" y2="150" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 4" />
+        
+        {/* Area path */}
+        <path
+          d="M 0 180 C 100 150, 200 190, 300 120 C 400 50, 500 140, 600 90 C 700 40, 750 80, 800 30 L 800 200 L 0 200 Z"
+          fill="url(#gradient)"
+        />
+        {/* Line path */}
+        <path
+          d="M 0 180 C 100 150, 200 190, 300 120 C 400 50, 500 140, 600 90 C 700 40, 750 80, 800 30"
+          fill="none"
+          stroke="#3B82F6"
+          strokeWidth="3"
+          strokeLinecap="round"
+          className="drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+        />
+        
+        {/* Data points */}
+        <circle cx="300" cy="120" r="4" fill="#0D0E11" stroke="#3B82F6" strokeWidth="2" />
+        <circle cx="600" cy="90" r="4" fill="#0D0E11" stroke="#3B82F6" strokeWidth="2" />
+        <circle cx="800" cy="30" r="4" fill="#0D0E11" stroke="#3B82F6" strokeWidth="2" className="animate-pulse" />
+      </svg>
+      <div className="absolute bottom-0 left-0 right-0 flex justify-between px-2 pb-1 text-[10px] text-gray-500 font-mono tracking-wider">
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+        <span className="text-[#3B82F6]">Sun (Live)</span>
+      </div>
+    </div>
+  );
+};
+
+// --- Terminal Feed ---
+const terminalLines = [
+  { msg: "[Gateway] Incoming payload: B2B_USDC_TRANSFER (id: 9a8b7)", time: "0.0ms", color: "text-gray-400" },
+  { msg: "[C++ Sanctions Pre-Filter] Checked OFAC/PEP against 42K entities", time: "1.4µs", color: "text-[#10B981]" },
+  { msg: "[C++ Sanctions Pre-Filter] Result: PASSED (No strict match)", time: "1.6µs", color: "text-[#10B981]" },
+  { msg: "[LLM Router] Generating speculative routing plan...", time: "15.0ms", color: "text-[#8B5CF6]" },
+  { msg: "[Groq LPU] Evaluated MiCA & GENIUS Act constraints", time: "220ms", color: "text-[#8B5CF6]" },
+  { msg: "[Groq LPU] Output: Confidence 0.98. Route -> Solana USDC", time: "240ms", color: "text-[#3B82F6]" },
+  { msg: "[Execution] Signed via MPC. Broadcasted to mempool.", time: "450ms", color: "text-gray-400" }
 ];
 
-interface GlobeMarker {
-  lat: number;
-  lng: number;
-  src: string;
-  label: string;
-}
-
-const sampleMarkers: GlobeMarker[] = [
-  {
-    lat: 40.7128,
-    lng: -74.006,
-    src: "https://assets.aceternity.com/avatars/1.webp",
-    label: "New York",
-  },
-  {
-    lat: 51.5074,
-    lng: -0.1278,
-    src: "https://assets.aceternity.com/avatars/2.webp",
-    label: "London",
-  },
-  {
-    lat: 35.6762,
-    lng: 139.6503,
-    src: "https://assets.aceternity.com/avatars/3.webp",
-    label: "Tokyo",
-  },
-  {
-    lat: -33.8688,
-    lng: 151.2093,
-    src: "https://assets.aceternity.com/avatars/4.webp",
-    label: "Sydney",
-  },
-  {
-    lat: 48.8566,
-    lng: 2.3522,
-    src: "https://assets.aceternity.com/avatars/5.webp",
-    label: "Paris",
-  },
-  {
-    lat: 28.6139,
-    lng: 77.209,
-    src: "https://assets.aceternity.com/avatars/6.webp",
-    label: "New Delhi",
-  },
-  {
-    lat: 55.7558,
-    lng: 37.6173,
-    src: "https://assets.aceternity.com/avatars/7.webp",
-    label: "Moscow",
-  },
-  {
-    lat: -22.9068,
-    lng: -43.1729,
-    src: "https://assets.aceternity.com/avatars/8.webp",
-    label: "Rio de Janeiro",
-  },
-  {
-    lat: 31.2304,
-    lng: 121.4737,
-    src: "https://assets.aceternity.com/avatars/9.webp",
-    label: "Shanghai",
-  },
-  {
-    lat: 25.2048,
-    lng: 55.2708,
-    src: "https://assets.aceternity.com/avatars/10.webp",
-    label: "Dubai",
-  },
-  {
-    lat: -34.6037,
-    lng: -58.3816,
-    src: "https://assets.aceternity.com/avatars/11.webp",
-    label: "Buenos Aires",
-  },
-  {
-    lat: 1.3521,
-    lng: 103.8198,
-    src: "https://assets.aceternity.com/avatars/12.webp",
-    label: "Singapore",
-  },
-  {
-    lat: 37.5665,
-    lng: 126.978,
-    src: "https://assets.aceternity.com/avatars/13.webp",
-    label: "Seoul",
-  }
-];
-
-export default function Dashboard() {
-  const [results, setResults] = useState<any[]>([]);
-  const [isRunning, setIsRunning] = useState(false);
-  const [metrics, setMetrics] = useState({
-    total: 0,
-    autoApproved: 0,
-    escalated: 0,
-    hardRejected: 0,
-    avgConfidence: 0,
-    processingTime: 0
-  });
-  const [filter, setFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+const TerminalFeed = () => {
+  const [lines, setLines] = useState<number>(0);
 
   useEffect(() => {
-    if (results.length > 0) {
-      const total = results.length;
-      const autoApproved = results.filter(r => r.result.status === 'AUTO_APPROVED').length;
-      const escalated = results.filter(r => r.result.status === 'ESCALATED').length;
-      const hardRejected = results.filter(r => r.result.status === 'HARD_REJECT').length;
-      const avgConfidence = results.reduce((sum, r) => sum + r.result.confidence, 0) / total;
+    const interval = setInterval(() => {
+      setLines((prev) => (prev < terminalLines.length ? prev + 1 : 0));
+    }, 800);
+    return () => clearInterval(interval);
+  }, []);
 
-      setMetrics({
-        total,
-        autoApproved,
-        escalated,
-        hardRejected,
-        avgConfidence,
-        processingTime: total * 0.8 // Simulated
-      });
-    }
-  }, [results]);
+  return (
+    <div className="font-mono text-xs space-y-1.5 h-full flex flex-col justify-end pt-4">
+      {terminalLines.slice(0, lines).map((line, i) => (
+        <div key={i} className="flex justify-between items-start animate-fade-in">
+          <span className={`${line.color} break-all pr-4`}>{line.msg}</span>
+          <span className="text-gray-500 shrink-0">{line.time}</span>
+        </div>
+      ))}
+      <div className="animate-pulse flex space-x-2 items-center text-gray-500 mt-2">
+        <div className="w-2 h-4 bg-gray-500"></div>
+        <span>Awaiting next event...</span>
+      </div>
+    </div>
+  );
+};
 
-  const runSimulation = async () => {
-    setIsRunning(true);
-    setResults([]);
+// --- Radial Progress ---
+const RadialProgress = ({ value, color }: { value: number, color: string }) => {
+  const radius = 36;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (value / 100) * circumference;
 
-    // Reset metrics
-    setMetrics({
-      total: 0,
-      autoApproved: 0,
-      escalated: 0,
-      hardRejected: 0,
-      avgConfidence: 0,
-      processingTime: 0
-    });
+  return (
+    <div className="relative inline-flex items-center justify-center">
+      <svg className="w-24 h-24 transform -rotate-90">
+        <circle
+          className="text-white/5"
+          strokeWidth="6"
+          stroke="currentColor"
+          fill="transparent"
+          r={radius}
+          cx="48"
+          cy="48"
+        />
+        <circle
+          className="transition-all duration-1000 ease-out"
+          strokeWidth="6"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          stroke={color}
+          fill="transparent"
+          r={radius}
+          cx="48"
+          cy="48"
+        />
+      </svg>
+      <div className="absolute flex flex-col items-center justify-center">
+        <span className="text-xl font-mono text-white tracking-tighter">{value}%</span>
+      </div>
+    </div>
+  );
+};
 
-    for (let i = 0; i < testCases.length; i++) {
-      const tx = testCases[i];
-      try {
-        const startTime = Date.now();
-        const response = await fetch('http://127.0.0.1:8080/api/v1/route-transaction', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(tx),
-        });
-        const data = await response.json();
-        const endTime = Date.now();
 
-        setResults(prev => [...prev, {
-          tx,
-          result: data,
-          latency: endTime - startTime
-        }]);
+// --- Main Dashboard Page ---
+export default function LedgerGuardDashboard() {
+  const [loading, setLoading] = useState(true);
+  const [hitlStatus, setHitlStatus] = useState<'pending' | 'approved' | 'rejected'>('pending');
+  const [txHash, setTxHash] = useState('');
 
-        // Small delay for visual effect
-        await new Promise(r => setTimeout(r, 400));
-      } catch (error) {
-        console.error("API Error:", error);
-        setResults(prev => [...prev, {
-          tx,
-          result: {
-            status: 'ERROR',
-            reason: 'API Connection Failed',
-            confidence: 0,
-            route: 'N/A',
-            fee_estimated: '$0.00'
-          },
-          latency: 0
-        }]);
-      }
-    }
-    setIsRunning(false);
+  useEffect(() => {
+    // Simulate 1s Progressive Loading Skeleton
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleManualApprove = () => {
+    setHitlStatus('approved');
+    setTxHash('0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join(''));
   };
 
-  const getStatusConfig = (status: string) => {
-    switch (status) {
-      case 'AUTO_APPROVED':
-        return {
-          label: 'Auto-Approved',
-          icon: CheckCircle,
-          color: 'bg-green-50 text-green-600 border border-green-200',
-          iconColor: 'text-green-500',
-          borderColor: 'border-green-200',
-          bgColor: 'bg-green-50',
-          textColor: 'text-green-600'
-        };
-      case 'ESCALATED':
-        return {
-          label: 'Requires Review',
-          icon: Clock,
-          color: 'bg-yellow-50 text-yellow-600 border border-yellow-200',
-          iconColor: 'text-yellow-500',
-          borderColor: 'border-yellow-200',
-          bgColor: 'bg-yellow-50',
-          textColor: 'text-yellow-600'
-        };
-      case 'HARD_REJECT':
-        return {
-          label: 'Blocked',
-          icon: XCircle,
-          color: 'bg-red-50 text-red-600 border border-red-200',
-          iconColor: 'text-red-500',
-          borderColor: 'border-red-200',
-          bgColor: 'bg-red-50',
-          textColor: 'text-red-600'
-        };
-      default:
-        return {
-          label: status,
-          icon: AlertTriangle,
-          color: 'bg-gray-50 text-gray-600 border border-gray-200',
-          iconColor: 'text-gray-500',
-          borderColor: 'border-gray-200',
-          bgColor: 'bg-gray-50',
-          textColor: 'text-gray-600'
-        };
-    }
+  const handleManualReject = () => {
+    setHitlStatus('rejected');
   };
 
-  const getRouteIcon = (route: string) => {
-    if (route.includes('USDC') || route.includes('Base')) return Zap;
-    if (route.includes('SWIFT')) return Bot;
-    if (route.includes('SEPA')) return Layout;
-    return Shield;
-  };
-
-  // Filter results based on status and search term
-  const filteredResults = results.filter(result => {
-    const statusMatch = filter === 'all' || result.result.status === filter;
-    const searchMatch = !searchTerm ||
-      result.tx.sender_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      result.tx.receiver_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      result.tx.sender_country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      result.tx.receiver_country.toLowerCase().includes(searchTerm.toLowerCase());
-
-    return statusMatch && searchMatch;
-  });
-
-  if (!results.length && !isRunning) {
+  if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-white p-6">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Header */}
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-                <Zap className="w-6 h-6 text-blue-600" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-1">
-                  KinexysRoute AI
-                </h1>
-                <p className="text-xl text-slate-500 font-medium">
-                  Autonomous Compliance & Routing Engine
-                </p>
-              </div>
-            </div>
-
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Intelligent stablecoin transaction processing with real-time AI-powered compliance screening and optimal routing decisions.
-            </p>
-
-            <div className="flex justify-center space-x-4 mt-8">
-              <button
-                onClick={runSimulation}
-                className="btn-primary px-8 py-3 text-lg font-semibold flex items-center space-x-3 hover-lift"
-              >
-                <Zap className="w-5 h-5" /> Run Compliance Simulation
-              </button>
-
-              <button
-                onClick={() => window.location.reload()}
-                className="btn-outline px-8 py-3 text-lg font-semibold flex items-center space-x-3 hover-lift"
-              >
-                <AlertTriangle className="w-5 h-5" /> Reset System
-              </button>
-            </div>
-          </div>
-
-          {/* System Overview Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-            <div className="metric-card hover-lift">
-              <div className="flex items-center space-x-4 mb-3">
-                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-blue-600" />
-                </div>
-                <div className="space-y-0">
-                  <p className="text-sm font-medium text-slate-500">AI Agents</p>
-                  <p className="text-2xl font-bold text-slate-900">4 Active</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="metric-card hover-lift">
-              <div className="flex items-center space-x-4 mb-3">
-                <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-green-600" />
-                </div>
-                <div className="space-y-0">
-                  <p className="text-sm font-medium text-slate-500">Compliance Score</p>
-                  <p className="text-2xl font-bold text-slate-900">99.2%</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="metric-card hover-lift">
-              <div className="flex items-center space-x-4 mb-3">
-                <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-purple-600" />
-                </div>
-                <div className="space-y-0">
-                  <p className="text-sm font-medium text-slate-500">Avg Processing</p>
-                  <p className="text-2xl font-bold text-slate-900">0.8s</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="metric-card hover-lift">
-              <div className="flex items-center space-x-4 mb-3">
-                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
-                  <List className="w-5 h-5 text-indigo-600" />
-                </div>
-                <div className="space-y-0">
-                  <p className="text-sm font-medium text-slate-500">Transaction Volume</p>
-                  <p className="text-2xl font-bold text-slate-900">Ready</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="bg-white rounded-xl shadow-md border border-slate-200 p-6 hover-lift">
-            <div className="flex items-start space-x-4">
-              <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mt-0.5">
-                <Search className="w-5 h-5 text-blue-600" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-2">How It Works</h2>
-                <div className="space-y-3 text-slate-600">
-                  <p className="flex items-center space-x-3">
-                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    <span>Click "Run Compliance Simulation" to process test transactions through the AI compliance engine</span>
-                  </p>
-                  <p className="flex items-center space-x-3">
-                    <Zap className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-                    <span>Watch as transactions are automatically screened, analyzed, and routed based on compliance policies</span>
-                  </p>
-                  <p className="flex items-center space-x-3">
-                    <Shield className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                    <span>Results show real-time decisions with confidence scores and routing recommendations</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="min-h-screen bg-[#070708] p-6 lg:p-8 flex items-center justify-center">
+        <div className="w-full max-w-7xl grid grid-cols-12 gap-6 animate-pulse">
+          <div className="col-span-12 lg:col-span-8 h-[340px] bg-[#0D0E11] rounded-xl border border-white/5"></div>
+          <div className="col-span-12 lg:col-span-4 h-[160px] bg-[#0D0E11] rounded-xl border border-white/5"></div>
+          <div className="col-span-12 lg:col-span-4 h-[160px] bg-[#0D0E11] rounded-xl border border-white/5"></div>
+          <div className="col-span-12 h-[300px] bg-[#0D0E11] rounded-xl border border-white/5 mt-[-156px] lg:mt-0"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-white p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Globe Section */}
-        <div className="mb-10">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-slate-900 text-center">
-              Global Transaction Network
-            </h2>
-            <p className="text-base text-slate-500 max-w-3xl mx-auto text-center">
-              Real-time visualization of cross-border stablecoin flows across major financial hubs
-            </p>
-            <div className="relative">
-              <div className="aspect-[1/1] w-[400px] mx-auto">
-                <Globe3D
-                  markers={sampleMarkers}
-                  config={{
-                    atmosphereColor: "#4da6ff",
-                    atmosphereIntensity: 20,
-                    bumpScale: 5,
-                    autoRotateSpeed: 0.3,
-                  }}
-                  onMarkerClick={(marker) => {
-                    console.log("Clicked marker:", marker.label);
-                  }}
-                  onMarkerHover={(marker) => {
-                    if (marker) {
-                      console.log("Hovering:", marker.label);
-                    }
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
+    <div className="min-h-screen bg-[#070708] text-gray-300 p-6 lg:p-8 font-sans selection:bg-[#3B82F6]/30">
+      <div className="max-w-7xl mx-auto space-y-6">
+        
         {/* Header */}
-        <div className="flex justify-between items-start mb-6">
-          <div className="space-y-1">
-            <div className="inline-flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                <Zap className="w-5 h-5 text-blue-600" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-slate-900">
-                  KinexysRoute AI
-                </h1>
-                <p className="text-xl text-slate-500 font-medium">
-                  Autonomous Compliance & Routing Engine
-                </p>
-              </div>
+        <header className="flex items-center justify-between pb-2 border-b border-white/5">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 rounded bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+              <Shield className="w-4 h-4 text-white" />
             </div>
-
-            <p className="text-sm text-slate-500 max-w-md">
-              Processing stablecoin transactions with AI-powered compliance screening and optimal routing
-            </p>
+            <h1 className="text-xl font-semibold text-white tracking-tight">LedgerGuard<span className="text-gray-500 font-normal"> / Compliance Engine</span></h1>
           </div>
-
-          <div className="flex items-end space-x-3">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search transactions..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="input input-lg w-48 pl-10 pr-4"
-              />
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                <Search className="w-4 h-4" />
-              </div>
-            </div>
-
-            <div className="relative">
-              <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                className="input input-lg w-32"
-              >
-                <option value="all">All Transactions</option>
-                <option value="AUTO_APPROVED">Auto-Approved</option>
-                <option value="ESCALATED">Requires Review</option>
-                <option value="HARD_REJECT">Blocked</option>
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                <AlertTriangle className="w-4 h-4" />
-              </div>
-            </div>
-
-            <button
-              onClick={runSimulation}
-              disabled={isRunning}
-              className="btn-primary px-6 py-3 text-lg font-semibold flex items-center space-x-3 hover-lift transition-all duration-200"
-            >
-              {isRunning ? (
-                <>
-                  <AlertTriangle className="w-5 h-5 animate-spin" /> Processing...
-                </>
-              ) : (
-                <>
-                  <Zap className="w-5 h-5" /> Run Simulation
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Metrics Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-blue-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Total Processed</p>
-                <p className="text-2xl font-bold text-slate-900">{metrics.total}</p>
-              </div>
+          <div className="flex items-center space-x-4 text-xs font-mono">
+            <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/20">
+              <div className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></div>
+              <span>System Operational</span>
             </div>
           </div>
+        </header>
 
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Auto-Approved</p>
-                <p className="text-2xl font-bold text-slate-900">{metrics.autoApproved}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-yellow-50 rounded-xl flex items-center justify-center">
-                <Clock className="w-5 h-5 text-yellow-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Requires Review</p>
-                <p className="text-2xl font-bold text-slate-900">{metrics.escalated}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center">
-                <XCircle className="w-5 h-5 text-red-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Blocked</p>
-                <p className="text-2xl font-bold text-slate-900">{metrics.hardRejected}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Additional Metrics Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
-                <Bot className="w-5 h-5 text-indigo-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">AI Confidence</p>
-                <p className="text-2xl font-bold text-slate-900">
-                  {(metrics.avgConfidence * 100).toFixed(1)}%
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
-                <Zap className="w-5 h-5 text-purple-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Avg Latency</p>
-                <p className="text-2xl font-bold text-slate-900">
-                  {metrics.processingTime.toFixed(1)}s
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="metric-card hover-lift">
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center">
-                <Shield className="w-5 h-5 text-teal-600" />
-              </div>
-              <div className="space-y-0">
-                <p className="text-sm font-medium text-slate-500">Success Rate</p>
-                <p className="text-2xl font-bold text-slate-900">
-                  {((metrics.autoApproved + metrics.escalated) / Math.max(metrics.total, 1) * 100).toFixed(1)}%
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Transaction Ledger */}
-        <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover-lift">
-          {filteredResults.length > 0 ? (
-            <>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-muted text-slate-600 font-medium border-b border-border sticky top-0 z-10">
-                    <tr>
-                      <th className="p-4 w-16">Status</th>
-                      <th className="p-4 min-w-0">Transaction Details</th>
-                      <th className="p-4 min-w-0">AI Analysis</th>
-                      <th className="p-4 min-w-0">Routing Decision</th>
-                      <th className="p-4 text-right w-20">Performance</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {filteredResults.map((item, idx) => (
-                      <tr
-                        key={idx}
-                        className="hover:bg-muted/50 transition-all duration-200 ease-in-out border-l-4"
-                        style={{
-                          borderLeftColor:
-                            item.result.status === 'AUTO_APPROVED' ? '#388e3c' :
-                            item.result.status === 'ESCALATED' ? '#f57c00' :
-                            item.result.status === 'HARD_REJECT' ? '#d32f2f' : '#6c757d'
-                        }}
-                      >
-                        <td className="p-4 flex items-center space-x-3">
-                          {getStatusConfig(item.result.status).icon && (
-                            <>
-                              {React.createElement(getStatusConfig(item.result.status).icon, {
-                                className: `w-5 h-5 ${getStatusConfig(item.result.status).iconColor}`
-                              })}
-                            </>
-                          )}
-                          <span className="font-medium text-slate-900">
-                            {getStatusConfig(item.result.status).label}
-                          </span>
-                        </td>
-
-                        <td className="p-4">
-                          <div className="space-y-2">
-                            <p className="flex items-center space-x-2 text-slate-900 font-medium">
-                              ${item.tx.amount_usd.toLocaleString()}
-                            </p>
-                            <p className="text-slate-500 text-xs">
-                              From: {item.tx.sender_name} ({item.tx.sender_country})
-                            </p>
-                            <p className="text-slate-500 text-xs">
-                              To: {item.tx.receiver_name} ({item.tx.receiver_country})
-                            </p>
-                            {item.tx.iso_postal_code && (
-                              <p className="text-slate-500 text-xs">
-                                Postal: {item.tx.iso_postal_code}
-                              </p>
-                            )}
-                          </div>
-                        </td>
-
-                        <td className="p-4">
-                          <div className="space-y-2">
-                            <div className="flex items-center space-x-3 mb-2">
-                              <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                                {item.result.confidence >= 0.95 ? (
-                                  <CheckCircle className="w-4 h-4 text-green-600" />
-                                ) : item.result.confidence >= 0.70 ? (
-                                  <AlertTriangle className="w-4 h-4 text-yellow-600" />
-                                ) : (
-                                  <XCircle className="w-4 h-4 text-red-600" />
-                                )}
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-slate-900">Confidence Score</p>
-                                <p className="text-lg font-bold text-slate-900 tracking-tight">
-                                  {(item.result.confidence * 100).toFixed(1)}%
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="confidence-bar">
-                              <div
-                                className={`confidence-fill ${item.result.confidence >= 0.95 ? 'bg-green-500' : item.result.confidence >= 0.70 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                                style={{ width: `${item.result.confidence * 100}%` }}
-                              />
-                            </div>
-
-                            {item.result.reason && (
-                              <p className="text-slate-500 text-xs mt-2">
-                                {item.result.reason}
-                              </p>
-                            )}
-                          </div>
-                        </td>
-
-                        <td className="p-4">
-                          <div className="space-y-2">
-                            {item.result.route ? (
-                              <div className="flex items-center space-x-3">
-                                <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                                  {React.createElement(getRouteIcon(item.result.route), {
-                                    className: "w-4 h-4 text-slate-600"
-                                  })}
-                                </div>
-                                <div className="space-y-1">
-                                  <p className="text-sm font-medium text-slate-900">
-                                    {item.result.route}
-                                  </p>
-                                  <p className="text-xs text-slate-500">
-                                    Fee: {item.result.fee_estimated}
-                                  </p>
-                                </div>
-                              </div>
-                            ) : (
-                              <p className="text-slate-500 text-xs text-center">
-                                Transaction Blocked
-                              </p>
-                            )}
-                          </div>
-                        </td>
-
-                        <td className="p-4 text-right space-y-2">
-                          <div className="text-sm font-medium text-slate-900">
-                            Latency: {item.latency?.toFixed(0) ?? 0}ms
-                          </div>
-                          {item.latency && (
-                            <div className="w-16 h-2 bg-muted/50 rounded-full overflow-hidden mt-2">
-                              <div
-                                className={`h-full bg-primary/20 rounded-full`}
-                                style={{
-                                  width: `${Math.min(item.latency / 2000 * 100, 100)}%`
-                                }}
-                              />
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Legend */}
-              <div className="mt-5 p-4 bg-muted/50 rounded-lg border-t border-border">
-                <div className="flex flex-wrap gap-4 text-slate-500 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full" />
-                    <span>Auto-Approved (≥95% confidence)</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-                    <span>Requires Review (70-94% confidence)</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full" />
-                    <span>Blocked (&lt;70% confidence)</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full" />
-                    <span>Routing: ⚡ Stablecoin | 🤖 Traditional | 🌐 Regional</span>
+        {/* 12-Column Bento Grid */}
+        <div className="grid grid-cols-12 gap-6 auto-rows-[minmax(160px,auto)]">
+          
+          {/* Widget A: Hero Ticker & Velocity Chart (col-8, row-2) */}
+          <GlowCard className="col-span-12 lg:col-span-8 row-span-2 p-6 flex flex-col justify-between">
+            <div>
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-sm font-medium text-gray-400">USDC Compliance Velocity (7D)</h2>
+                  <div className="flex items-baseline space-x-2 mt-1">
+                    <span className="text-4xl font-mono text-white tracking-tighter">$142.8M</span>
+                    <span className="text-sm font-mono text-[#10B981] flex items-center"><ArrowRight className="w-3 h-3 -rotate-45 mr-1" /> +12.4%</span>
                   </div>
                 </div>
+                <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                  <Activity className="w-5 h-5 text-[#3B82F6]" />
+                </div>
               </div>
-            </>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-muted/50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <AlertTriangle className="w-8 h-8 text-slate-400" />
-              </div>
-              <p className="text-lg text-slate-500 font-medium mb-3">
-                No transactions to display
-              </p>
-              <p className="text-sm text-slate-400 max-w-xl mx-auto">
-                Click "Run Simulation" to process transactions through the AI compliance engine
+              <p className="text-xs text-gray-500 mt-2 max-w-sm">
+                Real-time settlement throughput processed and cleared across regulatory boundaries.
               </p>
             </div>
-          )}
+            <div className="h-[200px] w-full">
+              <VelocityChart />
+            </div>
+          </GlowCard>
+
+          {/* Widget B: Live Pipeline Terminal (col-4, row-1) */}
+          <GlowCard className="col-span-12 lg:col-span-4 row-span-1 p-5 flex flex-col">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-sm font-medium text-gray-400 flex items-center">
+                <Terminal className="w-4 h-4 mr-2 text-[#8B5CF6]" />
+                Live Telemetry
+              </h2>
+              <span className="text-[10px] font-mono bg-white/5 px-2 py-1 rounded text-gray-400 border border-white/5">WS: CONNECTED</span>
+            </div>
+            <div className="flex-1 overflow-hidden relative">
+              <TerminalFeed />
+              <div className="absolute top-0 left-0 w-full h-8 bg-gradient-to-b from-[#0D0E11] to-transparent z-10 pointer-events-none"></div>
+            </div>
+          </GlowCard>
+
+          {/* Widget C: AI Confidence Score & Nodes (col-4, row-1) */}
+          <GlowCard className="col-span-12 lg:col-span-4 row-span-1 p-5 flex items-center justify-between">
+            <div className="space-y-4">
+              <div>
+                <h2 className="text-sm font-medium text-gray-400 mb-1">Global AI Confidence</h2>
+                <p className="text-xs text-gray-500">Trailing 24h rolling average</p>
+              </div>
+              <div className="flex space-x-4">
+                <div className="space-y-1">
+                  <div className="flex items-center text-xs text-gray-400 font-mono"><Server className="w-3 h-3 mr-1" /> VASP Nodes</div>
+                  <div className="text-lg font-mono text-white">12/12</div>
+                </div>
+                <div className="w-px bg-white/10"></div>
+                <div className="space-y-1">
+                  <div className="flex items-center text-xs text-gray-400 font-mono"><Network className="w-3 h-3 mr-1" /> Latency</div>
+                  <div className="text-lg font-mono text-[#3B82F6]">42ms</div>
+                </div>
+              </div>
+            </div>
+            <div className="shrink-0 pl-4">
+              <RadialProgress value={98} color="#3B82F6" />
+            </div>
+          </GlowCard>
+
+          {/* Widget D: Interactive HITL Escalation Queue (col-12, row-auto) */}
+          <GlowCard className={`col-span-12 row-span-3 p-0 transition-colors duration-500 ${
+            hitlStatus === 'approved' ? 'bg-[#10B981]/5 border-[#10B981]/20' : 
+            hitlStatus === 'rejected' ? 'bg-[#F87171]/5 border-[#F87171]/20' : ''
+          }`}>
+            <div className="p-6 border-b border-white/5 flex justify-between items-center bg-black/20">
+              <div className="flex items-center space-x-3">
+                <div className={`p-2 rounded-lg border ${
+                  hitlStatus === 'pending' ? 'bg-[#8B5CF6]/10 border-[#8B5CF6]/20 text-[#8B5CF6]' :
+                  hitlStatus === 'approved' ? 'bg-[#10B981]/10 border-[#10B981]/20 text-[#10B981]' :
+                  'bg-[#F87171]/10 border-[#F87171]/20 text-[#F87171]'
+                }`}>
+                  {hitlStatus === 'pending' ? <ShieldAlert className="w-5 h-5" /> : 
+                   hitlStatus === 'approved' ? <CheckCircle className="w-5 h-5" /> : 
+                   <XCircle className="w-5 h-5" />}
+                </div>
+                <div>
+                  <h2 className="text-base font-medium text-white">Human-In-The-Loop (HITL) Queue</h2>
+                  <p className="text-xs text-gray-500 font-mono mt-0.5">Escalation ID: #TX-992B-4F1A</p>
+                </div>
+              </div>
+              
+              {hitlStatus === 'pending' && (
+                <div className="flex space-x-3">
+                  <button onClick={handleManualReject} className="px-4 py-2 text-xs font-mono font-medium text-[#F87171] bg-[#F87171]/10 border border-[#F87171]/20 rounded-lg hover:bg-[#F87171]/20 transition-colors">
+                    Execute Reject
+                  </button>
+                  <button onClick={handleManualApprove} className="px-4 py-2 text-xs font-mono font-medium text-white bg-[#3B82F6] hover:bg-[#2563EB] shadow-[0_0_15px_rgba(59,130,246,0.4)] rounded-lg transition-all">
+                    Approve Manual Clear
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Transaction Details */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Held Transaction Context</h3>
+                  <div className="space-y-3 font-mono text-sm">
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-gray-500">Sender</span>
+                      <span className="text-white">NeoTech Ventures (AE)</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-gray-500">Beneficiary</span>
+                      <span className="text-white">Global Import DAO (CY)</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/5 pb-2">
+                      <span className="text-gray-500">Amount</span>
+                      <span className="text-[#3B82F6]">$125,000.00 USDC</span>
+                    </div>
+                    <div className="flex justify-between pb-2">
+                      <span className="text-gray-500">AI Confidence</span>
+                      <span className="text-[#F87171]">64.2% (Below Threshold)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {hitlStatus === 'approved' && (
+                  <div className="animate-fade-in bg-[#10B981]/10 border border-[#10B981]/20 rounded-lg p-4 font-mono text-xs">
+                    <div className="text-[#10B981] mb-1">✓ SEC/FEMA Manual Release Executed</div>
+                    <div className="text-gray-400">TxHash: <span className="text-white break-all">{txHash}</span></div>
+                  </div>
+                )}
+                {hitlStatus === 'rejected' && (
+                  <div className="animate-fade-in bg-[#F87171]/10 border border-[#F87171]/20 rounded-lg p-4 font-mono text-xs">
+                    <div className="text-[#F87171] mb-1">✗ Compliance Hold Executed</div>
+                    <div className="text-gray-400">Funds returned to sender wallet. Prompt change control entry logged.</div>
+                  </div>
+                )}
+              </div>
+
+              {/* AI Speculative Decoding */}
+              <div className="flex flex-col h-full">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 flex items-center">
+                  Speculative Decoding Reason <Zap className="w-3 h-3 ml-2 text-[#8B5CF6]" />
+                </h3>
+                <div className="bg-black/40 rounded-lg border border-white/5 p-4 font-mono text-[11px] leading-relaxed text-gray-400 flex-1 relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-[#8B5CF6]/50"></div>
+                  <p className="mb-2">
+                    <span className="text-white">{'>>'} RULE_EVAL (MiCA/Title_III):</span> The recipient entity "Global Import DAO" is registered in Cyprus, but the corporate footprint aligns with a heavily sanctioned shell cluster identified in recent FinCEN advisories.
+                  </p>
+                  <p className="mb-2">
+                    <span className="text-white">{'>>'} FUZZY_MATCH_WARNING:</span> 82% Levenshtein similarity to blocked entity "Global Imports Syndicate".
+                  </p>
+                  <p className="text-[#8B5CF6]">
+                    {'>>'} ACTION_REQUIRED: Manual officer override needed to verify ultimate beneficial ownership (UBO) documents before USDC unlock.
+                  </p>
+                  <div className="absolute bottom-2 right-4 text-[9px] text-gray-600">Llama-3.3-70B Evaluator</div>
+                </div>
+              </div>
+            </div>
+          </GlowCard>
+
         </div>
       </div>
     </div>
   );
 }
+
+// Add keyframes to global CSS if needed (assuming standard tailwind config includes basic fades)
+// Or we can rely on standard tailwind utility classes for opacity and transitions.
