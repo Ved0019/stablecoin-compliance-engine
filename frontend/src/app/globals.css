@@ -3,44 +3,48 @@
 @layer base {
   :root {
     --background: #ffffff;
-    --foreground: #171717;
+    --foreground: #1a1a1a;
     --card: #ffffff;
-    --border: #e5e7eb;
-    --input: #e5e7eb;
-    --primary: #6366f1;
+    --border: #e0e0e0;
+    --input: #f5f5f5;
+    --primary: #1976d2;
     --primary-foreground: #ffffff;
-    --secondary: #f3f4f6;
-    --secondary-foreground: #111827;
-    --muted: #f9fafb;
-    --muted-foreground: #6b7280;
-    --accent: #eff6ff;
-    --accent-foreground: #1e40af;
-    --destructive: #ef4444;
+    --secondary: #6c757d;
+    --secondary-foreground: #ffffff;
+    --muted: #f8f9fa;
+    --muted-foreground: #6c757d;
+    --accent: #e3f2fd;
+    --accent-foreground: #0d47a1;
+    --destructive: #d32f2f;
     --destructive-foreground: #ffffff;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --radius: 0.75rem;
+    --success: #388e3c;
+    --warning: #f57c00;
+    --info: #0288d1;
+    --radius: 1rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1.5rem;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background: #0a0a0a;
-      --foreground: #fafafa;
-      --card: #111827;
-      --border: #374151;
-      --input: #4b5563;
-      --primary: #818cf8;
-      --primary-foreground: #ffffff;
-      --secondary: #374151;
-      --secondary-foreground: #fafafa;
-      --muted: #1f2937;
-      --muted-foreground: #d1d5db;
-      --accent: #1e293b;
-      --accent-foreground: #fafafa;
-      --destructive: #f87171;
-      --destructive-foreground: #ffffff;
-      --success: #34d399;
-      --warning: #fbbf24;
+      --background: #121212;
+      --foreground: #e0e0e0;
+      --card: #1e1e1e;
+      --border: #333333;
+      --input: #2d2d2d;
+      --primary: #64b5f6;
+      --primary-foreground: #000000;
+      --secondary: #8e8e93;
+      --secondary-foreground: #ffffff;
+      --muted: #2d2d2d;
+      --muted-foreground: #b0b0b0;
+      --accent: #1e3a5f;
+      --accent-foreground: #90caf9;
+      --destructive: #e57373;
+      --destructive-foreground: #000000;
+      --success: #81c784;
+      --warning: #ffb74d;
+      --info: #4fc3f7;
     }
   }
 }
@@ -51,8 +55,16 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "normal";
+    font-variant-numeric: normal;
+  }
+
+  /* Improve text rendering for better readability */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -61,89 +73,284 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Enhanced Button Styles */
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium
-           bg-primary text-primary-foreground hover:bg-primary/90
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-           focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
-           transition-all duration-200;
+           transition-all duration-200 ease-in-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50
+           shadow-sm hover:shadow-md;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium
-           bg-secondary text-secondary-foreground hover:bg-secondary/80
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-           focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
-           transition-all duration-200;
+           transition-all duration-200 ease-in-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50
+           shadow-sm hover:shadow-md;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
 
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium
+           transition-all duration-200 ease-in-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50
+           shadow-sm hover:shadow-md;
+    @apply border border-input bg-background text-primary hover:bg-primary/5;
+  }
+
+  .btn-icon {
+    @apply inline-flex items-center justify-center rounded-full
+           transition-all duration-200 ease-in-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50
+           shadow-sm hover:shadow-md h-10 w-10;
+    @apply bg-muted text-muted-foreground hover:bg-primary/10 text-primary;
+  }
+
+  /* Enhanced Card Styles */
   .card {
     @apply bg-card border border-border rounded-lg
-           shadow-sm hover:shadow-md transition-shadow duration-200;
+           shadow-sm hover:shadow-md transition-all duration-200 ease-in-out;
+    @apply border-none; /* Remove default border for cleaner look */
+    @apply bg-white/90 backdrop-blur-sm; /* Glassmorphism effect */
   }
 
+  .card-elevated {
+    @apply bg-card border border-border rounded-lg
+           shadow-md hover:shadow-lg transition-all duration-200 ease-in-out;
+  }
+
+  /* Enhanced Input Styles */
   .input {
     @apply flex h-10 w-full rounded-md border border-input
-           bg-background px-3 py-2 text-sm ring-offset-background
-           file:border-0 file:bg-transparent file:text-sm file:font-medium
-           placeholder:text-muted-foreground
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-           focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50
-           [&::placeholder]:text-muted-foreground;
+           bg-background px-4 py-2 text-sm
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+           disabled:cursor-not-allowed disabled:opacity-50
+           transition-all duration-200 ease-in-out;
+    @apply placeholder:text-muted-foreground;
+    @apply [&::placeholder]:text-muted-foreground;
   }
 
+  .input-lg {
+    @apply h-12 px-5 text-base;
+  }
+
+  /* Enhanced Table Styles */
   .table-header {
     @apply bg-muted px-6 py-3 text-left text-xs font-medium text-muted-foreground
-           uppercase tracking-wider;
+           uppercase tracking-wider border-b border-border;
   }
 
   .table-row {
-    @apply bg-white border-b border-border hover:bg-accent transition-background
+    @apply bg-background border-b border-border hover:bg-muted/50 transition-background duration-200 ease-in-out
            cursor-pointer;
   }
 
+  .table-row:hover {
+    @apply bg-muted/50;
+  }
+
+  /* Enhanced Badge Styles */
   .status-badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+           shadow-sm;
   }
 
   .status-auto-approved {
-    @apply bg-green-50 text-green-700;
+    @apply bg-green-50 text-green-600 border border-green-200;
   }
 
   .status-escalated {
-    @apply bg-yellow-50 text-yellow-700;
+    @apply bg-yellow-50 text-yellow-600 border border-yellow-200;
   }
 
   .status-hard-reject {
-    @apply bg-red-50 text-red-700;
+    @apply bg-red-50 text-red-600 border border-red-200;
   }
 
-  .confidence-bar {
-    @apply w-full h-2 bg-muted rounded-full overflow-hidden;
+  .status-info {
+    @apply bg-blue-50 text-blue-600 border border-blue-200;
   }
 
-  .confidence-fill {
-    @apply h-full bg-primary transition-width duration-300;
-  }
-
+  /* Enhanced Metric Styles */
   .metric-card {
-    @apply bg-card border border-border rounded-lg p-6
-           hover:shadow-md transition-shadow duration-200;
+    @apply bg-card border border-border rounded-lg
+           p-6 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out;
+    @apply border-none bg-white/80 backdrop-blur-sm;
   }
 
   .metric-value {
-    @apply text-2xl font-bold text-foreground;
+    @apply text-2xl font-bold text-foreground tracking-tight;
   }
 
   .metric-label {
-    @apply text-sm text-muted-foreground;
+    @apply text-sm text-muted-foreground font-medium tracking-wider;
   }
 
+  .metric-delta {
+    @apply text-sm font-medium;
+  }
+
+  /* Enhanced Section Styles */
   .section-title {
-    @apply text-lg font-semibold text-foreground mb-4;
+    @apply text-lg font-semibold text-foreground mb-4 tracking-tighter;
   }
 
   .section-subtitle {
     @apply text-sm text-muted-foreground mb-6;
+  }
+
+  .section-header {
+    @apply flex justify-between items-center mb-6;
+  }
+
+  /* Enhanced Confidence Bar */
+  .confidence-bar {
+    @apply w-full h-2 bg-muted rounded-full overflow-hidden
+           transition-width duration-300 ease-in-out;
+  }
+
+  .confidence-fill {
+    @apply h-full transition-width duration-300 ease-in-out;
+  }
+
+  /* Enhanced Alert Styles */
+  .alert {
+    @apply flex items-start space-x-4 rounded-lg p-6
+           shadow-sm border border-border;
+  }
+
+  .alert-icon {
+    @apply flex-shrink-0 mt-0.5 h-5 w-5;
+  }
+
+  .alert-content {
+    @apply flex-1 space-y-1;
+  }
+
+  .alert-title {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  .alert-description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .alert-success {
+    @apply bg-green-50 text-green-800 border-green-200;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-50 text-yellow-800 border-yellow-200;
+  }
+
+  .alert-error {
+    @apply bg-red-50 text-red-800 border-red-200;
+  }
+
+  .alert-info {
+    @apply bg-blue-50 text-blue-800 border-blue-200;
+  }
+
+  /* Enhanced Loading States */
+  .loader {
+    @apply inline-block h-4 w-4 rounded-full
+           animate-spin border-2 border-solid
+           border-current border-t-transparent
+           opacity-75;
+  }
+
+  /* Enhanced Focus Rings */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-200 ease-in-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+  }
+
+  /* Enhanced Animations */
+  .fade-in {
+    @apply animate-fade-in;
+  }
+
+  .slide-up {
+    @apply animate-slide-up;
+  }
+
+  /* Custom Animations */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out forwards;
+  }
+
+  /* Responsive Utilities */
+  .gap-2 {
+    @apply gap-0.5;
+  }
+
+  .gap-3 {
+    @apply gap-0.75;
+  }
+
+  .gap-4 {
+    @apply gap-1;
+  }
+
+  .gap-5 {
+    @apply gap-1.25;
+  }
+
+  .gap-6 {
+    @apply gap-1.5;
+  }
+
+  .gap-8 {
+    @apply gap-2;
+  }
+
+  .gap-10 {
+    @apply gap-2.5;
+  }
+
+  .gap-12 {
+    @apply gap-3;
+  }
+
+  .gap-16 {
+    @apply gap-4;
+  }
+
+  .gap-20 {
+    @apply gap-5;
+  }
+
+  .gap-24 {
+    @apply gap-6;
+  }
+
+  .gap-32 {
+    @apply gap-8;
   }
 }
