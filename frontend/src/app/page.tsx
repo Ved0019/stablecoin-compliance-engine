@@ -366,6 +366,64 @@ export default function LedgerGuardDashboard() {
     setIsRunning(false);
   };
 
+  const handleAddCustomTransaction = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate
+    if (!senderName || !senderCountry || !receiverName || !receiverCountry || !amountUsd) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    const tx = {
+      id: Date.now().toString(), // temporary ID
+      sender_name: senderName,
+      sender_country: senderCountry,
+      receiver_name: receiverName,
+      receiver_country: receiverCountry,
+      amount_usd: parseFloat(amountUsd),
+      iso_postal_code: isoPostalCode || null
+    };
+
+    try {
+      const startTime = Date.now();
+      const response = await fetch('http://127.0.0.1:8080/api/v1/route-transaction', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tx),
+      });
+      const data = await response.json();
+      const endTime = Date.now();
+
+      setResults(prev => [...prev, {
+        tx,
+        result: data,
+        latency: endTime - startTime
+      }]);
+
+      // Reset form
+      setSenderName('');
+      setSenderCountry('');
+      setReceiverName('');
+      setReceiverCountry('');
+      setAmountUsd('');
+      setIsoPostalCode('');
+    } catch (error) {
+      console.error("API Error:", error);
+      setResults(prev => [...prev, {
+        tx,
+        result: {
+          status: 'ERROR',
+          reason: 'API Connection Failed',
+          confidence: 0,
+          route: 'N/A',
+          fee_estimated: '$0.00'
+        },
+        latency: 0
+      }]);
+    }
+  };
+
   const getStatusConfig = (status: string) => {
     switch (status) {
       case 'AUTO_APPROVED':
@@ -468,53 +526,102 @@ export default function LedgerGuardDashboard() {
             <h1 className="text-xl font-semibold text-foreground tracking-tight">LedgerGuard<span className="text-muted-foreground font-normal"> / Compliance Engine</span></h1>
           </div>
 
-          <div className="flex items-center space-x-4 text-xs font-mono">
-            <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-success/10 text-success border border-success/20">
-              <div className="w-2 h-2 rounded-full bg-success animate-pulse"></div>
-              <span>System Operational</span>
-            </div>
+          <div className="flex flex-col items-center space-x-4 text-xs font-mono">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-success/10 text-success border border-success/20">
+                <div className="w-2 h-2 rounded-full bg-success animate-pulse"></div>
+                <span>System Operational</span>
+              </div>
 
-            <div className="relative">
-              <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                className="input input-lg w-32"
-              >
-                <option value="all">All Transactions</option>
-                <option value="AUTO_APPROVED">Auto-Approved</option>
-                <option value="ESCALATED">Requires Review</option>
-                <option value="HARD_REJECT">Blocked</option>
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                <AlertTriangle className="w-4 h-4" />
+              <div className="relative">
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className="input input-lg w-32"
+                >
+                  <option value="all">All Transactions</option>
+                  <option value="AUTO_APPROVED">Auto-Approved</option>
+                  <option value="ESCALATED">Requires Review</option>
+                  <option value="HARD_REJECT">Blocked</option>
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                  <AlertTriangle className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                  className="btn-outline hover-lift"
+                  title="Toggle theme"
+                >
+                  {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+                </button>
+
+                <button
+                  onClick={runSimulation}
+                  disabled={isRunning}
+                  className="btn-primary px-6 py-3 text-lg font-semibold flex items-center space-x-3 hover-lift transition duration-200"
+                >
+                  {isRunning ? (
+                    <>
+                      <AlertTriangle className="w-5 h-5 animate-spin" /> Processing...
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="w-5 h-5" /> Run Simulation
+                    </>
+                  )}
+                </button>
               </div>
             </div>
-
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                className="btn-outline hover-lift"
-                title="Toggle theme"
-              >
-                {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            <form className="flex flex-wrap items-end space-x-2 mt-2" onSubmit={handleAddCustomTransaction}>
+              <input
+                type="text"
+                placeholder="Sender Name"
+                value={senderName}
+                onChange={(e) => setSenderName(e.target.value)}
+                className="input input-sm w-24"
+              />
+              <input
+                type="text"
+                placeholder="Sender Country"
+                value={senderCountry}
+                onChange={(e) => setSenderCountry(e.target.value)}
+                className="input input-sm w-20"
+              />
+              <input
+                type="text"
+                placeholder="Receiver Name"
+                value={receiverName}
+                onChange={(e) => setReceiverName(e.target.value)}
+                className="input input-sm w-24"
+              />
+              <input
+                type="text"
+                placeholder="Receiver Country"
+                value={receiverCountry}
+                onChange={(e) => setReceiverCountry(e.target.value)}
+                className="input input-sm w-20"
+              />
+              <input
+                type="number"
+                placeholder="Amount (USD)"
+                value={amountUsd}
+                onChange={(e) => setAmountUsd(e.target.value)}
+                className="input input-sm w-20"
+              />
+              <input
+                type="text"
+                placeholder="Postal Code (Optional)"
+                value={isoPostalCode}
+                onChange={(e) => setIsoPostalCode(e.target.value)}
+                className="input input-sm w-24"
+              />
+              <button type="submit" className="btn-primary px-3 py-2 text-sm">
+                Add Transaction
               </button>
-
-              <button
-                onClick={runSimulation}
-                disabled={isRunning}
-                className="btn-primary px-6 py-3 text-lg font-semibold flex items-center space-x-3 hover-lift transition duration-200"
-              >
-                {isRunning ? (
-                  <>
-                    <AlertTriangle className="w-5 h-5 animate-spin" /> Processing...
-                  </>
-                ) : (
-                  <>
-                    <Zap className="w-5 h-5" /> Run Simulation
-                  </>
-                )}
-              </button>
-            </div>
+            </form>
           </div>
         </header>
 
