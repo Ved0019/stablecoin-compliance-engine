@@ -30,6 +30,7 @@ export default function Globe3D({
 }: Globe3DProps) {
   const globeRef = useRef<HTMLDivElement>(null);
   const [hoveredMarker, setHoveredMarker] = useState<GlobeMarker | null>(null);
+  const [rotation, setRotation] = useState(0);
 
   const {
     atmosphereColor = '#4da6ff',
@@ -56,20 +57,20 @@ export default function Globe3D({
     const globe = globeRef.current;
     if (!globe) return;
 
-    let rotation = 0;
+    let frameId: number;
+    let currentRotation = 0;
     const animate = () => {
-      rotation += autoRotateSpeed * 0.01; // Slow rotation
-      globe.style.setProperty('--rotation', `${rotation}deg`);
-      requestAnimationFrame(animate);
+      currentRotation += autoRotateSpeed * 0.01;
+      setRotation(currentRotation);
+      globe.style.setProperty('--rotation', `${currentRotation}deg`);
+      frameId = requestAnimationFrame(animate);
     };
 
     animate();
 
     // Cleanup would go here if needed
-    return () => {
-      // Cleanup animation frame if needed
-    };
-  }, [markers, atmosphereColor, atmosphereIntensity, bumpScale, autoRotateSpeed, onMarkerClick, onMarkerHover]);
+    return () => cancelAnimationFrame(frameId);
+  }, [autoRotateSpeed]);
 
   // Convert lat/lng to 3D coordinates on sphere
   const getMarkerPosition = (marker: GlobeMarker, globeSize: number) => {
@@ -84,7 +85,6 @@ export default function Globe3D({
     const z = radius * Math.cos(lat) * Math.sin(lng);
 
     // Apply rotation
-    const rotation = parseFloat(globeRef.current?.style.getPropertyValue('--rotation') || '0');
     const rotatedX = x * Math.cos(rotation * Math.PI / 180) - z * Math.sin(rotation * Math.PI / 180);
     const rotatedZ = x * Math.sin(rotation * Math.PI / 180) + z * Math.cos(rotation * Math.PI / 180);
 
@@ -171,7 +171,7 @@ export default function Globe3D({
       {/* Marker containers */}
       <div className="absolute inset-0 pointer-events-none">
         {markers.map((marker, index) => {
-          const { x, y, z } = getMarkerPosition(marker, 200); // Increased radius for better spacing
+          const { z } = getMarkerPosition(marker, 200); // Increased radius for better spacing
           const { x: x2d, y: y2d } = getMarker2DPosition(marker, 400); // 400 is globe diameter
 
           // Only show markers on the front hemisphere (simplified)
@@ -233,7 +233,7 @@ export default function Globe3D({
                   >
                     {markers.map((otherMarker, otherIndex) => {
                       if (otherIndex !== index) {
-                        const { x: x2, y: y2, z: z2 } = getMarkerPosition(otherMarker, 200);
+                        const { z: z2 } = getMarkerPosition(otherMarker, 200);
                         const { x: x2d2, y: y2d2 } = getMarker2DPosition(otherMarker, 400);
                         const isOtherVisible = z2 > -80;
 

@@ -10,22 +10,14 @@ import {
   Clock,
   Shield,
   ShieldAlert,
-  Terminal,
-  TrendingUp,
   Zap,
   Bot,
   Layout,
-  List,
-  Search,
-  Settings,
-  Download,
-  Upload,
   Server,
   Network,
   Moon,
   Sun
 } from 'lucide-react';
-import Globe3D from '@/components/ui/3d-globe';
 
 // --- Glow Card Component (Cursor-Tracking Border) ---
 const GlowCard = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
@@ -141,6 +133,30 @@ const terminalLines = [
   { msg: "[Execution] Signed via MPC. Broadcasted to mempool.", time: "450ms", color: "text-gray-500" }
 ];
 
+interface TransactionResult {
+  status: 'AUTO_APPROVED' | 'ESCALATED' | 'HARD_REJECT' | 'ERROR';
+  reason?: string;
+  confidence: number;
+  route?: string;
+  fee_estimated?: string;
+}
+
+interface TransactionInput {
+  id: string;
+  sender_name: string;
+  sender_country: string;
+  receiver_name: string;
+  receiver_country: string;
+  amount_usd: number;
+  iso_postal_code: string | null;
+}
+
+interface SimulationResult {
+  tx: TransactionInput;
+  result: TransactionResult;
+  latency: number;
+}
+
 const TerminalFeed = () => {
   const [lines, setLines] = useState<number>(0);
 
@@ -210,19 +226,18 @@ export default function LedgerGuardDashboard() {
   const [loading, setLoading] = useState(true);
   const [hitlStatus, setHitlStatus] = useState<'pending' | 'approved' | 'rejected'>('pending');
   const [txHash, setTxHash] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<SimulationResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [metrics, setMetrics] = useState({
-    total: 0,
-    autoApproved: 0,
-    escalated: 0,
-    hardRejected: 0,
-    avgConfidence: 0,
-    processingTime: 0
-  });
   const [filter, setFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const [senderName, setSenderName] = useState('');
+  const [senderCountry, setSenderCountry] = useState('');
+  const [receiverName, setReceiverName] = useState('');
+  const [receiverCountry, setReceiverCountry] = useState('');
+  const [amountUsd, setAmountUsd] = useState('');
+  const [isoPostalCode, setIsoPostalCode] = useState('');
 
   // Set theme on mount
   useEffect(() => {
@@ -235,38 +250,25 @@ export default function LedgerGuardDashboard() {
     return () => clearTimeout(timer);
   }, [theme]);
 
-  useEffect(() => {
-    if (results.length > 0) {
-      const total = results.length;
-      const autoApproved = results.filter(r => r.result.status === 'AUTO_APPROVED').length;
-      const escalated = results.filter(r => r.result.status === 'ESCALATED').length;
-      const hardRejected = results.filter(r => r.result.status === 'HARD_REJECT').length;
-      const avgConfidence = results.reduce((sum, r) => sum + r.result.confidence, 0) / total;
-
-      setMetrics({
-        total,
-        autoApproved,
-        escalated,
-        hardRejected,
-        avgConfidence,
-        processingTime: total * 0.8 // Simulated
-      });
-    }
-  }, [results]);
+  const total = results.length;
+  const autoApproved = results.filter(r => r.result.status === 'AUTO_APPROVED').length;
+  const escalated = results.filter(r => r.result.status === 'ESCALATED').length;
+  const hardRejected = results.filter(r => r.result.status === 'HARD_REJECT').length;
+  const avgConfidence = total > 0
+    ? results.reduce((sum, r) => sum + r.result.confidence, 0) / total
+    : 0;
+  const metrics = {
+    total,
+    autoApproved,
+    escalated,
+    hardRejected,
+    avgConfidence,
+    processingTime: total * 0.8
+  };
 
   const runSimulation = async () => {
     setIsRunning(true);
     setResults([]);
-
-    // Reset metrics
-    setMetrics({
-      total: 0,
-      autoApproved: 0,
-      escalated: 0,
-      hardRejected: 0,
-      avgConfidence: 0,
-      processingTime: 0
-    });
 
     // Mock test data for simulation
     const testCases = [
@@ -328,16 +330,14 @@ export default function LedgerGuardDashboard() {
 
     for (let i = 0; i < testCases.length; i++) {
       const tx = testCases[i];
-      try {
+        try {
         const startTime = Date.now();
-        // Mock API response
-        const data = {
-          status: Math.random() > 0.7 ? 'AUTO_APPROVED' : Math.random() > 0.3 ? 'ESCALATED' : 'HARD_REJECT',
-          reason: 'Compliance check passed',
-          confidence: Math.random() * 0.3 + 0.7, // 0.7-1.0
-          route: Math.random() > 0.5 ? 'Solana USDC' : 'Ethereum USDC',
-          fee_estimated: '$0.25'
-        };
+        const response = await fetch('http://127.0.0.1:8080/api/v1/route-transaction', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tx),
+        });
+        const data = await response.json();
         const endTime = Date.now();
 
         setResults(prev => [...prev, {
@@ -596,7 +596,7 @@ export default function LedgerGuardDashboard() {
                 </div>
               </div>
             </div>
-          </div>
+          </GlowCard>
 
           {/* Widget D: Interactive Sanctions Escalation Queue (col-12, row-3) */}
           <GlowCard className={`col-span-12 row-span-3 p-0 transition-colors duration-500 ${
@@ -670,7 +670,10 @@ export default function LedgerGuardDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
-                    {filteredResults.map((item, idx) => (
+                    {filteredResults.map((item, idx) => {
+                      const statusConfig = getStatusConfig(item.result.status);
+
+                      return (
                       <tr
                         key={idx}
                         className="hover:bg-white/5 transition duration-200 ease-in-out border-l-4"
@@ -682,15 +685,15 @@ export default function LedgerGuardDashboard() {
                         }}
                       >
                         <td className="p-4 flex items-center space-x-3">
-                          {getStatusConfig(item.result.status).icon && (
+                          {statusConfig.icon && (
                             <>
-                              {React.createElement(getStatusConfig(item.result.status).icon, {
-                                className: `w-5 h-5 ${getStatusConfig(item.result.status).iconColor}`}
+                              {React.createElement(statusConfig.icon, {
+                                className: `w-5 h-5 ${statusConfig.iconColor}`
                               })}
                             </>
                           )}
                           <span className="font-medium text-foreground">
-                            {getStatusConfig(item.result.status).label}
+                            {statusConfig.label}
                           </span>
                         </td>
 
@@ -790,7 +793,8 @@ export default function LedgerGuardDashboard() {
                           )}
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
                 {hitlStatus === 'approved' && (
@@ -805,6 +809,7 @@ export default function LedgerGuardDashboard() {
                     <div className="text-muted-foreground">Funds returned to sender wallet. Prompt change control entry logged.</div>
                   </div>
                 )}
+              </div>
               </>
           ) : (
             <div className="flex h-[300px] items-center justify-center">
@@ -816,7 +821,7 @@ export default function LedgerGuardDashboard() {
                   No transactions to display
                 </p>
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  Click "Run Simulation" to process transactions through the AI compliance engine
+                  Click &quot;Run Simulation&quot; to process transactions through the AI compliance engine
                 </p>
               </div>
             </div>

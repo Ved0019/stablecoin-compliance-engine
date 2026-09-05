@@ -1,159 +1,150 @@
-# 🛡️ LedgerGuard: AI-Powered B2B Compliance & Routing Engine
+# LedgerGuard
 
-**Razorpay AI Buildathon Open Track (Track 05)**
-*Live Repository:* [GitHub - stablecoin-compliance-engine](https://github.com/Ved0019/stablecoin-compliance-engine)
+LedgerGuard is a compliance-aware transaction routing service for cross-border B2B payments. It combines deterministic sanctions screening, regulatory checks, route optimization, and a human-in-the-loop dashboard into one local development stack.
 
----
+## What It Does
 
-> ### ⚠️ Note to Judges (Live Demo)
-> This project is currently deployed using free-tier cloud resources.
-> * **Frontend (Vercel):** Loads instantly.
-> * **Backend (Render):** *May take 45–60 seconds to wake from sleep on the very first transaction simulation.* Please be patient on the initial run!
+For each transaction, LedgerGuard:
 
----
+1. Screens the receiver against the configured sanctions/watchlist data.
+2. Evaluates regulatory rules with a Groq-backed LLM when configured.
+3. Falls back to deterministic rules when the LLM is unavailable or times out.
+4. Selects a route based on confidence, cost, settlement speed, and risk.
+5. Returns one of `AUTO_APPROVED`, `ESCALATED`, or `HARD_REJECT`.
 
-## 🧠 The Speed-Compliance Paradox (The Problem)
+The dashboard includes a transaction simulation workflow and a visual overview of global payment activity.
 
-While digital currencies settle at machine speed on public blockchains, corporate B2B adoption is bottlenecked by regulatory fragmentation. If a transaction settles on-chain in 2 seconds, but the mandatory AML, KYC, and sanctions checks take 48 hours, the velocity advantage is entirely lost.
-
-Furthermore, evolving mandates like the **U.S. GENIUS Act** require Permitted Payment Stablecoin Issuers (PPSIs) to enforce strict, bank-grade compliance programs. Violations result in severe penalties, making "black box" AI unusable for corporate treasuries.
-
-**The Solution:** LedgerGuard evaluates multi-jurisdictional constraints in milliseconds, provides a fully auditable "Confidence Score" for every transaction, and gracefully escalates edge cases to a Human-in-the-Loop (HITL) dashboard.
-
----
-
-## 🏗️ System Architecture
+## Architecture
 
 ```text
-                    +-----------------------------------+
-                    |     Corporate ERP / Invoice       |
-                    +-----------------+-----------------+
-                                      | (Payment Request)
-                                      v
-                    +-----------------+-----------------+
-                    |     LedgerGuard Ingestion       |
-                    +-----------------+-----------------+
-                                      |
-                 +--------------------+--------------------+
-                 v                                         v
-    +-----------------------+                 +-----------------------+
-    |  Real-Time NLP Engine |                 |  Real-Time Sanctions  |
-    | (Parses GENIUS Act /  |                 |  Screening (OFAC/PEP) |
-    | MiCA Regulatory Docs) |                 |   [RapidFuzz Match]   |
-    +-----------+-----------+                 +-----------+-----------+
-                |                                         |
-                | (Compliance Constraints JSON)           | (Risk Profile Score)
-                +--------------------+--------------------+
-                                     |
-                                     v
-                    +-----------------+-----------------+
-                    |    Reinforcement Router Agent     |
-                    |   (Calculates Fee, Speed & Risk)  |
-                    +-----------------+-----------------+
-                                      |
-                                      v
-                    +-----------------+-----------------+
-                    |    Human-in-the-Loop Gateway      |
-                    |  (Threshold: Auto/Review/Reject)  |
-                    +-----------------+-----------------+
-                                      |
-         +----------------------------+----------------------------+
-         | (Auto-Approved)                                         | (Low-Confidence)
-         v                                                         v
-+--------+--------+                                       +--------+--------+
-| Execution Node  |                                       | Compliance      |
-| (On-Chain/Fiat) |                                       | Queue (HITL)    |
-+-----------------+                                       +-----------------+
-
+Browser dashboard (Next.js :3000)
+              |
+              | POST /api/v1/route-transaction
+              v
+FastAPI service (Uvicorn :8080)
+       |
+       +--> Sanctions screening and cache
+       +--> Regulatory NLP check or rule-based fallback
+       +--> Route optimizer
+       +--> Compliance decision
 ```
 
----
+## Repository Structure
 
-## ⚙️ Core Technical Mechanics
-
-### 1. Agentic Watchlist Screening
-
-Before hitting the LLM, the payload is concurrently screened against OFAC and PEP lists using deterministic fuzzy-matching (**RapidFuzz**):
-
-$$ \text{Fuzzy Match Score}(S_1, S_2) = \text{Levenshtein Distance Metric} $$
-
-Matches exceeding the risk tolerance automatically trigger a `HARD_REJECT` block.
-
-### 2. Reinforcement Learning (RL) Route Optimization
-
-The routing agent models the payment path as a state-transition problem, maximizing the reward function $R_t$ to balance cost, settlement latency, and regulatory risk:
-
-$$ R_t = - \left( w_{\text{fee}} \cdot C_{\text{tx}} + w_{\text{time}} \cdot T_{\text{settlement}} + w_{\text{risk}} \cdot \text{Risk}_{\text{compliance}} \right) $$
-
----
-
-## 🛠️ Tech Stack
-
-* **Frontend:** Next.js, React, Tailwind CSS, Lucide Icons
-* **Backend:** Python, FastAPI, Uvicorn
-* **AI & NLP Routing:** LangChain, Groq (`gpt-oss-20b` LPU inference)
-* **Deterministic Screening:** RapidFuzz (String matching)
-
----
-
-## 🚀 Local Setup Guide
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Ved0019/stablecoin-compliance-engine.git
-cd stablecoin-compliance-engine
+```text
+LedgerGuard/
+├── backend/
+│   ├── api/routes/          FastAPI route handlers
+│   ├── core/                Screening, NLP, caching, and routing logic
+│   ├── models/              Pydantic request models
+│   ├── scripts/             Operational and simulation scripts
+│   ├── main.py              FastAPI application entry point
+│   ├── pyproject.toml       Python project metadata and dependencies
+│   ├── requirements.txt     Pip-compatible dependency list
+│   └── test_*.py            Backend integration and behavior checks
+├── frontend/
+│   ├── src/app/             Next.js app and dashboard page
+│   ├── src/components/      Reusable UI components
+│   ├── public/               Static assets
+│   ├── package.json         Frontend scripts and dependencies
+│   └── tailwind.config.js   Tailwind theme configuration
+├── .gitignore
+└── README.md
 ```
 
-### 2. Backend Setup (FastAPI + Groq)
+## Requirements
 
-```bash
-cd backend
+- Python 3.12 or newer
+- Node.js 20 or newer and npm
+- A Groq API key is optional. Without it, the backend uses its deterministic fallback rules.
+
+## Quick Start
+
+### 1. Start the backend
+
+From PowerShell:
+
+```powershell
+cd C:\Users\vedya\Developer\Projects\LedgerGuard\backend
 python -m venv .venv
-source .venv/bin/activate  # Use .venv\Scripts\activate on Windows
-pip install -r requirements.txt
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m uvicorn main:app --reload --port 8080
 ```
 
-* Create a `.env` file in the `/backend` folder and add your free Groq API key:
+On macOS/Linux, activate the environment with `source .venv/bin/activate`.
 
-```env
-GROQ_API_KEY="your_groq_api_key"
-```
+The backend is available at:
 
-* Start the server:
+- Health check: http://127.0.0.1:8080/health
+- Swagger API docs: http://127.0.0.1:8080/docs
+- OpenAPI schema: http://127.0.0.1:8080/openapi.json
 
-```bash
-uv run uvicorn main:app --reload --port 8080
-```
+### 2. Start the frontend
 
-### 3. Frontend Setup (Next.js Dashboard)
+Open a second terminal:
 
-Open a new terminal window:
-
-```bash
-cd frontend
+```powershell
+cd C:\Users\vedya\Developer\Projects\LedgerGuard\frontend
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser to interact with the Human-in-the-Loop dashboard.
+Open http://localhost:3000.
 
----
+The dashboard currently calls the local API at `http://127.0.0.1:8080`.
 
-## 🚧 Build Challenges & Technical Obstacles
-Excessive Token Consumption (The "AI Tax")
-The operational cost of running unoptimized AI agents can quietly kill a fintech startup's margins.
-The Problem: Multi-agent architectures are computationally heavy, consuming roughly 15 times the tokens of a standard chat interaction. If your routing engine queries a heavy LLM API for every micro-payment, your infrastructure cost will scale directly with transaction volume, rendering low-value L2 stablecoin transfers uneconomical.
-How to Solve It: Implement hybrid semantic caching. Cache embedding-based inputs for standard compliance lookups and repeat corridors, bypassing the LLM entirely for known transactions to recover massive cost-efficiency.
+## Configuration
 
-Throughput Collapse and Timeout Truncation at Scale
-While highly complex agent architectures (such as reflexive loops) work beautifully in low-volume testing, they behave unpredictably under heavy enterprise loads.
-The Problem: Benchmark data shows that while reflexive agent systems achieve the highest accuracy at low volumes, their performance degrades rapidly beyond 25,000 documents per day. Under peak load, the queuing delays caused by multi-turn agent conversations result in system timeouts. When these timeouts truncate the correction loops, the accuracy of the entire system collapses.
-How to Solve It: Build your architecture to support dynamic scale-resilient fallbacks. If your transaction queue begins to backup, have the orchestrator dynamically shift from a heavy reflexive pattern to a more scale-resilient, deterministic sequential pipeline to preserve processing throughput.
+Create `backend/.env` for optional LLM support:
 
-Agent Coordination Failures and "Overthinking" Loops
-As you add specialized agents to handle different compliance jurisdictions, the complexity of inter-agent communication increases.
-The Problem: Studies show that agent coordination failures (such as message corruption, deadlocks, and conflicting assumptions) are a primary reason multi-agent systems fail. Furthermore, if your engine uses a reflexive self-correction architecture to refine low-confidence routing routes, it can experience "oscillating ambiguity resolution"—where the AI gets trapped in an infinite loop, overthinking and bouncing between different interpretations of a complex regulatory mandate.
-How to Solve It: Place strict limits (maximum of 2 to 3 iterations) on self-correction loops. If the model fails to reach a confident decision within these bounds, the system must trigger a deterministic fallback to route the transaction to a human operations dashboard.
+```env
+GROQ_API_KEY=your_groq_api_key
+```
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ved0019/stablecoin-compliance-engine)
+Do not commit `.env` files or API keys. The backend remains runnable without this key by using rule-based compliance checks.
+
+## API Example
+
+```powershell
+$body = @{
+  id = "local-demo-001"
+  sender_name = "Global Tech Solutions Inc"
+  sender_country = "US"
+  receiver_name = "EuroTech Distribution GmbH"
+  receiver_country = "DE"
+  amount_usd = 450.0
+  iso_postal_code = "10115"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8080/api/v1/route-transaction `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+## Validation
+
+Frontend production build:
+
+```powershell
+cd frontend
+npm run build
+```
+
+Backend checks:
+
+```powershell
+cd backend
+python -m compileall .
+python test_improvements.py
+```
+
+The integration scripts may call the configured LLM when `GROQ_API_KEY` is present. Without a key, they exercise the deterministic fallback path.
+
+## Development Notes
+
+- `main.py` mounts the transaction router under `/api/v1` and exposes permissive CORS for local development.
+- The frontend and backend are intentionally separate applications and should run in separate terminals.
+- The project is a development/demo implementation and should not be used for real payment authorization without independent security, compliance, data-quality, and operational review.
