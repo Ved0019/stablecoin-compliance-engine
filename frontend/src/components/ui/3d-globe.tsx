@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 
 export interface GlobeMarker {
   lat: number;
@@ -37,6 +38,20 @@ export default function Globe3D({
     autoRotateSpeed = 0.3
   } = config;
 
+  const handleMarkerMouseEnter = (marker: GlobeMarker) => {
+    setHoveredMarker(marker);
+    onMarkerHover?.(marker);
+  };
+
+  const handleMarkerMouseLeave = () => {
+    setHoveredMarker(null);
+    onMarkerHover?.(null);
+  };
+
+  const handleMarkerClick = (marker: GlobeMarker) => {
+    onMarkerClick?.(marker);
+  };
+
   useEffect(() => {
     const globe = globeRef.current;
     if (!globe) return;
@@ -49,21 +64,6 @@ export default function Globe3D({
     };
 
     animate();
-
-    // Handle marker hover/click
-    const handleMarkerMouseEnter = (marker: GlobeMarker) => {
-      setHoveredMarker(marker);
-      onMarkerHover?.(marker);
-    };
-
-    const handleMarkerMouseLeave = () => {
-      setHoveredMarker(null);
-      onMarkerHover?.(null);
-    };
-
-    const handleMarkerClick = (marker: GlobeMarker) => {
-      onMarkerClick?.(marker);
-    };
 
     // Cleanup would go here if needed
     return () => {
@@ -111,7 +111,7 @@ export default function Globe3D({
         '--atmosphere-color': atmosphereColor,
         '--atmosphere-intensity': atmosphereIntensity.toString(),
         '--bump-scale': bumpScale.toString()
-      }}
+      } as CSSProperties}
     >
       {/* Globe sphere with enhanced styling */}
       <div className="absolute inset-0 rounded-full overflow-hidden">

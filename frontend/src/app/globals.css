@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 
 @layer base {
   :root {
@@ -20,6 +21,7 @@
     --success: #388e3c;
     --warning: #f57c00;
     --info: #0288d1;
+    --ring: #1976d2;
     --radius: 1rem;
     --radius-sm: 0.5rem;
     --radius-lg: 1.5rem;
@@ -45,6 +47,7 @@
       --success: #81c784;
       --warning: #ffb74d;
       --info: #4fc3f7;
+      --ring: #64b5f6;
     }
   }
 }
@@ -145,7 +148,7 @@
   }
 
   .table-row {
-    @apply bg-background border-b border-border hover:bg-muted/50 transition-background duration-200 ease-in-out
+    @apply bg-background border-b border-border hover:bg-muted/50 transition-colors duration-200 ease-in-out
            cursor-pointer;
   }
 
@@ -210,11 +213,11 @@
   /* Enhanced Confidence Bar */
   .confidence-bar {
     @apply w-full h-2 bg-muted rounded-full overflow-hidden
-           transition-width duration-300 ease-in-out;
+           transition-[width] duration-300 ease-in-out;
   }
 
   .confidence-fill {
-    @apply h-full transition-width duration-300 ease-in-out;
+    @apply h-full transition-[width] duration-300 ease-in-out;
   }
 
   /* Enhanced Alert Styles */
@@ -279,11 +282,11 @@
 
   /* Enhanced Animations */
   .fade-in {
-    @apply animate-fade-in;
+    animation: fade-in 0.3s ease-out forwards;
   }
 
   .slide-up {
-    @apply animate-slide-up;
+    animation: slide-up 0.3s ease-out forwards;
   }
 
   /* Custom Animations */
@@ -305,52 +308,4 @@
     animation: slide-up 0.3s ease-out forwards;
   }
 
-  /* Responsive Utilities */
-  .gap-2 {
-    @apply gap-0.5;
-  }
-
-  .gap-3 {
-    @apply gap-0.75;
-  }
-
-  .gap-4 {
-    @apply gap-1;
-  }
-
-  .gap-5 {
-    @apply gap-1.25;
-  }
-
-  .gap-6 {
-    @apply gap-1.5;
-  }
-
-  .gap-8 {
-    @apply gap-2;
-  }
-
-  .gap-10 {
-    @apply gap-2.5;
-  }
-
-  .gap-12 {
-    @apply gap-3;
-  }
-
-  .gap-16 {
-    @apply gap-4;
-  }
-
-  .gap-20 {
-    @apply gap-5;
-  }
-
-  .gap-24 {
-    @apply gap-6;
-  }
-
-  .gap-32 {
-    @apply gap-8;
-  }
 }

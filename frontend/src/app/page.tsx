@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AlertTriangle,
   CheckCircle,
@@ -17,6 +17,7 @@ import {
   Download,
   Upload,
 } from 'lucide-react';
+import Globe3D from '@/components/ui/3d-globe';
 
 const testCases = [
   {
@@ -160,7 +161,8 @@ const sampleMarkers: GlobeMarker[] = [
     lng: 126.978,
     src: "https://assets.aceternity.com/avatars/13.webp",
     label: "Seoul",
-  };
+  }
+];
 
 export default function Dashboard() {
   const [results, setResults] = useState<any[]>([]);
@@ -441,7 +443,7 @@ export default function Dashboard() {
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-slate-900 text-center">
               Global Transaction Network
-            </div>
+            </h2>
             <p className="text-base text-slate-500 max-w-3xl mx-auto text-center">
               Real-time visualization of cross-border stablecoin flows across major financial hubs
             </p>
@@ -746,7 +748,7 @@ export default function Dashboard() {
                                     Fee: {item.result.fee_estimated}
                                   </p>
                                 </div>
-                              )
+                              </div>
                             ) : (
                               <p className="text-slate-500 text-xs text-center">
                                 Transaction Blocked
@@ -789,7 +791,7 @@ export default function Dashboard() {
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full" />
-                    <span>Blocked (<70% confidence)</span>
+                    <span>Blocked (&lt;70% confidence)</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full" />
